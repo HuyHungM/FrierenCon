@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { ActivityType, Events } = require("discord.js");
 
 module.exports = (client) => {
@@ -7,7 +8,7 @@ module.exports = (client) => {
     client.user.setPresence({
       activities: [
         {
-          name: "nhạc | w!help",
+          name: `nhạc | ${process.env.PREFIX}help`,
           type: ActivityType.Playing,
         },
       ],
