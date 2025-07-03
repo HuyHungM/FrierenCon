@@ -1,0 +1,2 @@
+# WaifuBot
+ A Waifu Bot

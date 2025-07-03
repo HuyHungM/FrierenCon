@@ -1,0 +1,123 @@
+#dashboard {
+  padding: 20px;
+}
+
+/* ========== DASHBOARD - MESSAGE LIST ========== */
+#dashboard .center {
+  flex: 1;
+  height: auto;
+  overflow-y: auto;
+}
+
+#dashboard .message-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  flex: 1;
+  overflow: auto;
+  gap: 16px;
+  padding-bottom: 24px;
+  position: relative;
+}
+
+#dashboard .message-list .dot-loading {
+  bottom: 8px;
+  left: 16px;
+  height: auto;
+  width: 40px;
+  border-radius: 16px;
+  background: linear-gradient(to right, rgb(215, 159, 169), var(--color-danger));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 8px;
+}
+
+#dashboard .message-list .dot-loading span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: aliceblue;
+  border-radius: 50%;
+  animation: dotLoading 1000ms ease-in-out both infinite;
+  animation-delay: var(--delay);
+}
+
+#dashboard .message-list .message-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+}
+
+#dashboard .message-list .message-container .message {
+  max-width: 80%;
+  height: auto;
+  padding: 8px 12px;
+  border-radius: 16px;
+  width: fit-content;
+  user-select: text;
+}
+
+#dashboard .message-list .message-container.notification {
+  justify-content: center;
+  text-align: center;
+  margin: 8px 0;
+}
+
+#dashboard .message-list .message-container.waifu {
+  justify-content: flex-start;
+
+  & .message {
+    background: linear-gradient(to right, rgb(215, 159, 169), var(--color-danger));
+    justify-self: start;
+  }
+}
+
+#dashboard .message-list .message-container.user {
+  justify-content: flex-end;
+
+  & .message {
+    background-color: var(--color-white);
+  }
+}
+
+#dashboard #message-form {
+  height: auto;
+  padding: 16px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px
+}
+
+#dashboard #message-form #message-input {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  overflow-y: auto;
+  max-height: 140px;
+  border-radius: 12px;
+  filter: brightness(1.5);
+  padding: 8px 16px;
+  background: var(--color-background);
+  border: none;
+  color: var(--color-dark);
+  font-size: 16px;
+  font-weight: 400;
+  resize: none;
+  overflow-wrap: break-word;
+}
+
+#dashboard #message-form #send-message-btn {
+  background: none;
+  cursor: pointer;
+
+  & i {
+    font-size: 20px;
+    color: var(--color-primary)
+  }
+}

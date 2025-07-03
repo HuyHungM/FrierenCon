@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Âm nhạc - <%= guild.name %></title>
+    <link rel="manifest" href="/api/get/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="<%= client.user.username %>"
+    />
+    <!-- MATERIAL ICON -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="/css/animation.min.css" />
+    <link rel="stylesheet" href="/css/global.min.css" />
+    <link rel="stylesheet" href="/css/music.min.css" />
+    <link
+      rel="shortcut icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+    />
+  </head>
+  <body onload="loadPage()" class="dashboard-body">
+    <div id="loader">
+      <div class="loading">
+        <span></span>
+      </div>
+    </div>
+
+    <div id="container">
+      <aside id="sidebar">
+        <div class="top">
+          <a class="name" href="/">
+            <img
+              src="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+              alt="<%= client.user.username %>"
+              class="logo"
+            />
+            <span
+              class="shining-text"
+              style="--color-text-shadow: var(--color-success)"
+              ><%= client.user.username %>
+            </span>
+          </a>
+        </div>
+        <div class="sidebar-sections">
+          <div class="sidebar-section">
+            <div class="title">
+              <h2>Bảng điều khiển</h2>
+            </div>
+            <ul class="sidebar-items">
+              <li class="sidebar-item">
+                <a href="/server/<%= guild.id %>">
+                  <i class="fa-solid fa-eye"></i>
+                  <span>Tổng quan</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a href="/server/<%= guild.id %>/waifu">
+                  <i class="fa-solid fa-robot"></i>
+                  <span>Waifu</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <li class="sidebar-item expand active" style="--item-count: 3">
+                <div class="sidebar-expand-btn">
+                  <i class="fa-solid fa-music"></i>
+                  <span>Âm nhạc</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </div>
+                <ul class="sidebar-expand">
+                  <li class="expand-item active">
+                    <a href="/server/<%= guild.id %>/music">Thông tin</a>
+                  </li>
+                  <li class="expand-item">
+                    <a href="/server/<%= guild.id %>/music/search">Tìm kiếm</a>
+                  </li>
+                  <li class="expand-item">
+                    <a href="/server/<%= guild.id %>/music/queue">Hàng chờ</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="sidebar-section">
+            <div class="title">
+              <h2>Máy chủ</h2>
+            </div>
+            <ul class="sidebar-items">
+              <li class="sidebar-item active">
+                <a href="/server/<%= guild.id %>/music">
+                  <img
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    alt="<%= guild.name %>"
+                    class="logo"
+                  />
+                  <span><%= guild.name %></span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <% user.guilds.filter((x) => (x.id !== guild.id)).map((guild) => {
+              %>
+              <li class="sidebar-item">
+                <a href="/server/<%= guild.id %>/music">
+                  <img
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    alt="<%= guild.name %>"
+                    class="logo"
+                  />
+                  <span><%= guild.name %></span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+        <div id="close-sidebar-btn">
+          <i class="fa-solid fa-reply-all"></i>
+          Close
+        </div>
+      </aside>
+
+      <main id="main">
+        <header id="header">
+          <div id="menu-btn" class="btn">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div class="profile">
+            <div class="btn">
+              <img
+                src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.png' %>"
+                alt="<%= guild.name %>"
+                class="logo"
+              />
+              <span><%= user.username %></span>
+            </div>
+            <ul class="expand">
+              <li>
+                <a href="/servers">
+                  <i class="fa-solid fa-server"></i>
+                  <span>Danh sách m.chủ</span>
+                </a>
+              </li>
+              <li>
+                <a href="/logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </header>
+
+        <section id="dashboard">
+          <div class="title">Âm nhạc - <%= guild.name %></div>
+          <div class="center">
+            <div class="player-info">
+              <div
+                class="songs"
+                style="--background-icon: var(--color-primary)"
+              >
+                <i class="fa-solid fa-list-ol"></i>
+                <div class="middle">
+                  <h3>Hàng đợi</h3>
+                  <h1>Đang tải...</h1>
+                </div>
+                <small class="text-muted">Trực tiếp</small>
+              </div>
+              <div
+                class="autoplay"
+                style="--background-icon: var(--color-success)"
+              >
+                <i class="fa-solid fa-folder-plus"></i>
+                <div class="middle">
+                  <h3>Tự động phát</h3>
+                  <h1>Đang tải...</h1>
+                </div>
+                <small class="text-muted">Trực tiếp</small>
+              </div>
+              <div class="loop" style="--background-icon: var(--color-danger)">
+                <i class="fa-solid fa-repeat"></i>
+                <div class="middle">
+                  <h3>Chế độ lặp</h3>
+                  <h1>Đang tải...</h1>
+                </div>
+                <small class="text-muted">Trực tiếp</small>
+              </div>
+              <div
+                class="volume"
+                style="--background-icon: var(--color-warning)"
+              >
+                <i class="fa-solid fa-volume-high"></i>
+                <div class="middle">
+                  <h3>Âm thanh</h3>
+                  <h1>Đang tải...</h1>
+                </div>
+                <small class="text-muted">Trực tiếp</small>
+              </div>
+            </div>
+
+            <div class="now-playing">
+              <h1>Thông tin bài hát</h1>
+
+              <div class="current-song">
+                <h3>Hiện đang phát</h3>
+                <a href="#">Đang tải...</a>
+              </div>
+              <div class="next-song">
+                <h3>
+                  <span>Kế tiếp:</span>
+                  <a href="#" target="_blank"></a>
+                </h3>
+              </div>
+              <div class="duration">
+                <h3>Thời lượng</h3>
+                <div class="navigation">
+                  <div class="passed-timeline">
+                    <i class="btn fa-solid fa-record-vinyl"></i>
+                  </div>
+                  <div class="timeline"></div>
+                </div>
+                <div class="time">
+                  <span class="current-time"></span>
+                  <span class="song-time"></span>
+                </div>
+              </div>
+
+              <ul class="controller">
+                <li id="autoplay-btn" class="music-btn">
+                  <i class="fa-solid fa-arrows-rotate"></i>
+                </li>
+                <li id="previous-btn" class="music-btn">
+                  <i class="fa-solid fa-backward-step"></i>
+                </li>
+                <li id="play-btn" class="music-btn">
+                  <i class="fa-solid fa-play"></i>
+                </li>
+                <li id="next-btn" class="music-btn">
+                  <i class="fa-solid fa-forward-step"></i>
+                </li>
+                <li id="loop-btn" class="music-btn">
+                  <i class="fa-solid fa-repeat"></i>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.5/client-dist/socket.io.min.js"></script>
+    <script>
+      const guildId = "<%- guild.id %>";
+      const userId = "<%= user.id %>"
+      const RepeatMode = Object.create(<%- JSON.stringify(RepeatMode) %>);
+    </script>
+    <script src="/js/global.min.js"></script>
+    <script src="/js/music.min.js"></script>
+    <script src="/js/musicController.min.js"></script>
+  </body>
+</html>

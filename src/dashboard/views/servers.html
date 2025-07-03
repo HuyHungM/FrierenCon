@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bảng điều khiển - <%= client.user.username %></title>
+    <link rel="manifest" href="/api/get/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="<%= client.user.username %>"
+    />
+    <!-- MATERIAL ICON -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="/css/animation.min.css" />
+    <link rel="stylesheet" href="/css/global.min.css" />
+    <link rel="stylesheet" href="/css/servers.min.css" />
+    <link
+      rel="shortcut icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+    />
+  </head>
+  <body onload="loadPage()">
+    <div id="loader">
+      <div class="loading">
+        <span></span>
+      </div>
+    </div>
+
+    <div id="container">
+      <!-- NAVBAR -->
+      <nav id="navbar">
+        <div class="center">
+          <a href="/" class="name"
+            ><img
+              src="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+              class="logo"
+            />
+            <span
+              class="bubble-text hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+              ><%= client.user.username %></span
+            ></a
+          >
+          <ul class="social-credit">
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-discord"></i>
+              </a>
+            </li>
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+            </li>
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+            </li>
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+            </li>
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+            </li>
+            <li
+              class="hover-glow"
+              style="--color-text-shadow: var(--color-dark)"
+            >
+              <a href="#">
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <section id="servers">
+        <div class="title">
+          <h1>Danh sách máy chủ</h1>
+        </div>
+        <div class="server-list">
+          <% user.guilds.map((guild) => { %>
+          <div class="server-card">
+            <div class="icon">
+              <img
+                src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png` : '/assets/images/default_guild_icon.png' %>"
+                alt="<%= guild.name %>"
+              />
+            </div>
+            <div class="name">
+              <h3><%= guild.name %></h3>
+            </div>
+            <% if (guild.inGuild) { %>
+            <a class="btn" href="/server/<%= guild.id %>"> Bảng điều khiển </a>
+            <% } else { %>
+            <div
+              class="btn invite"
+              onclick="openDiscordInvite({ clientID: '<%= client.user.id %>', callbackURL: '<%= domain %>/servers', guildID: '<%= guild.id %>' })"
+            >
+              Mời vào máy chủ
+            </div>
+            <% } %>
+          </div>
+          <% }) %>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer id="footer">
+        <div class="content">
+          <div class="left">Đã đăng kí bản quyền © <%= moment().year() %></div>
+          <ul class="right">
+            <li><a href="#">Điều khoản sử dụng</a></li>
+            <li><a href="#">Chính sách bảo mật</a></li>
+            <li><a href="#">Chính Sách Hoàn Trả</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="/js/global.min.js"></script>
+    <script src="/js/servers.min.js"></script>
+  </body>
+</html>

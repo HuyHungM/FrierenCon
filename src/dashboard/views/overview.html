@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tổng quan - <%= guild.name %></title>
+    <link rel="manifest" href="/api/get/manifest.json" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="<%= client.user.username %>"
+    />
+    <!-- MATERIAL ICON -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="/css/animation.min.css" />
+    <link rel="stylesheet" href="/css/global.min.css" />
+    <link rel="stylesheet" href="/css/overview.min.css" />
+    <link
+      rel="shortcut icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+      type="image/png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+    />
+  </head>
+  <body onload="loadPage()" class="dashboard-body">
+    <div id="loader">
+      <div class="loading">
+        <span></span>
+      </div>
+    </div>
+
+    <div id="container">
+      <aside id="sidebar">
+        <div class="top">
+          <a class="name" href="/">
+            <img
+              src="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+              alt="<%= client.user.username %>"
+              class="logo"
+            />
+            <span
+              class="shining-text"
+              style="--color-text-shadow: var(--color-success)"
+              ><%= client.user.username %>
+            </span>
+          </a>
+        </div>
+        <div class="sidebar-sections">
+          <div class="sidebar-section">
+            <div class="title">
+              <h2>Bảng điều khiển</h2>
+            </div>
+            <ul class="sidebar-items">
+              <li class="sidebar-item active">
+                <a href="/server/<%= guild.id %>">
+                  <i class="fa-solid fa-eye"></i>
+                  <span>Tổng quan</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <li class="sidebar-item">
+                <a href="/server/<%= guild.id %>/waifu">
+                  <i class="fa-solid fa-robot"></i>
+                  <span>Waifu</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <li class="sidebar-item expand" style="--item-count: 3">
+                <div class="sidebar-expand-btn">
+                  <i class="fa-solid fa-music"></i>
+                  <span>Âm nhạc</span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </div>
+                <ul class="sidebar-expand">
+                  <li class="expand-item">
+                    <a href="/server/<%= guild.id %>/music">Thông tin</a>
+                  </li>
+                  <li class="expand-item">
+                    <a href="/server/<%= guild.id %>/music/search">Tìm kiếm</a>
+                  </li>
+                  <li class="expand-item">
+                    <a href="/server/<%= guild.id %>/music/queue">Hàng chờ</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="sidebar-section">
+            <div class="title">
+              <h2>Máy chủ</h2>
+            </div>
+            <ul class="sidebar-items">
+              <li class="sidebar-item active">
+                <a href="/server/<%= guild.id %>/music">
+                  <img
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    alt="<%= guild.name %>"
+                    class="logo"
+                  />
+                  <span><%= guild.name %></span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <% user.guilds.filter((x) => (x.id !== guild.id)).map((guild) => {
+              %>
+              <li class="sidebar-item">
+                <a href="/server/<%= guild.id %>/music">
+                  <img
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    alt="<%= guild.name %>"
+                    class="logo"
+                  />
+                  <span><%= guild.name %></span>
+                  <i class="fa-solid fa-chevron-right expand-icon"></i>
+                </a>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+        <div id="close-sidebar-btn">
+          <i class="fa-solid fa-reply-all"></i>
+          Close
+        </div>
+      </aside>
+
+      <main id="main">
+        <header id="header">
+          <div id="menu-btn" class="btn">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div class="profile">
+            <div class="btn">
+              <img
+                src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.png' %>"
+                alt="<%= guild.name %>"
+                class="logo"
+              />
+              <span><%= user.username %></span>
+            </div>
+            <ul class="expand">
+              <li>
+                <a href="/servers">
+                  <i class="fa-solid fa-server"></i>
+                  <span>Danh sách m.chủ</span>
+                </a>
+              </li>
+              <li>
+                <a href="/logout">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </header>
+
+        <section id="dashboard">
+          <div class="title">Tổng quan - <%= guild.name %></div>
+          <div class="center">
+            <div class="insights">
+              <div
+                class="members"
+                style="
+                  --background-icon: var(--color-primary);
+                  --animation-delay: 0ms;
+                "
+              >
+                <i class="fa-solid fa-user-group"></i>
+                <div class="middle">
+                  <div class="left">
+                    <h3>Thành viên</h3>
+                    <h1>
+                      <%= guild.members.cache.filter(member =>
+                      !member.user.bot).size %>
+                    </h1>
+                  </div>
+                  <div class="progress">
+                    <svg>
+                      <circle
+                        class="progress-circle"
+                        cx="38"
+                        cy="38"
+                        r="36"
+                      ></circle>
+                    </svg>
+                    <div class="number">
+                      <p class="percentage">
+                        <%= ((guild.members.cache.filter(member =>
+                        !member.user.bot).size)/(guild.members.cache.size)*100).toFixed(2)
+                        %>%
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted">Tất cả thời gian</small>
+              </div>
+              <div
+                class="bots"
+                style="
+                  --background-icon: var(--color-success);
+                  --animation-delay: 300ms;
+                "
+              >
+                <i class="fa-solid fa-robot"></i>
+                <div class="middle">
+                  <div class="left">
+                    <h3>Bots</h3>
+                    <h1>
+                      <%= guild.members.cache.filter(member =>
+                      member.user.bot).size %>
+                    </h1>
+                  </div>
+                  <div class="progress">
+                    <svg>
+                      <circle
+                        class="progress-circle"
+                        cx="38"
+                        cy="38"
+                        r="36"
+                      ></circle>
+                    </svg>
+                    <div class="number">
+                      <p class="percentage">
+                        <%= ((guild.members.cache.filter(member =>
+                        member.user.bot).size)/(guild.members.cache.size)*100).toFixed(2)
+                        %>%
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted">Tất cả thời gian</small>
+              </div>
+              <div
+                class="text-channels"
+                style="
+                  --background-icon: var(--color-danger);
+                  --animation-delay: 600ms;
+                "
+              >
+                <i class="fa-solid fa-file-lines"></i>
+                <div class="middle">
+                  <div class="left">
+                    <h3>Kênh văn bản</h3>
+                    <h1>
+                      <%= guild.channels.cache.filter((channel) => channel.type
+                      === ChannelType.GuildText).size %>
+                    </h1>
+                  </div>
+                  <div class="progress">
+                    <svg>
+                      <circle
+                        class="progress-circle"
+                        cx="38"
+                        cy="38"
+                        r="36"
+                      ></circle>
+                    </svg>
+                    <div class="number">
+                      <p class="percentage">
+                        <%= ((guild.channels.cache.filter(guild => guild.type
+                        ===
+                        ChannelType.GuildText).size)/(guild.channels.cache.size)*100).toFixed(2)
+                        %>%
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted">Tất cả thời gian</small>
+              </div>
+              <div
+                class="voice-channels"
+                style="
+                  --background-icon: var(--color-warning);
+                  --animation-delay: 0ms;
+                "
+              >
+                <i class="fa-solid fa-microphone-lines"></i>
+                <div class="middle">
+                  <div class="left">
+                    <h3>Kênh thoại</h3>
+                    <h1>
+                      <%= guild.channels.cache.filter((channel) => channel.type
+                      === ChannelType.GuildVoice).size %>
+                    </h1>
+                  </div>
+                  <div class="progress">
+                    <svg>
+                      <circle
+                        class="progress-circle"
+                        cx="38"
+                        cy="38"
+                        r="36"
+                      ></circle>
+                    </svg>
+                    <div class="number">
+                      <p class="percentage">
+                        <%= ((guild.channels.cache.filter(guild => guild.type
+                        ===
+                        ChannelType.GuildVoice).size)/(guild.channels.cache.size)*100).toFixed(2)
+                        %>%
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted">Tất cả thời gian</small>
+              </div>
+              <div
+                class="messages"
+                style="
+                  --background-icon: var(--color-dark-variant);
+                  --animation-delay: 300ms;
+                "
+              >
+                <i class="fa-solid fa-comment"></i>
+                <div class="middle">
+                  <div class="left">
+                    <h3>Tin nhắn</h3>
+                    <h1>
+                      <% let messageCount = 0; %> <%
+                      guild.channels.cache.filter((channel) => channel.type ===
+                      ChannelType.GuildText).map((channel) => messageCount+=
+                      channel.messages.cache.size) %> <%= messageCount %>
+                    </h1>
+                  </div>
+                  <div class="progress">
+                    <svg>
+                      <circle
+                        class="progress-circle"
+                        cx="38"
+                        cy="38"
+                        r="36"
+                      ></circle>
+                    </svg>
+                    <div class="number">
+                      <p class="percentage">100%</p>
+                    </div>
+                  </div>
+                </div>
+                <small class="text-muted">24 giờ qua</small>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- SCRIPT -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="/js/global.min.js"></script>
+    <script src="/js/overview.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,270 @@
+#dashboard {
+  padding: 20px;
+}
+
+/* ========== DASHBOARD - PLAYER INFO ========== */
+#dashboard .center {
+  align-items: center;
+  justify-content: center;
+  gap: 3.2rem;
+  height: auto;
+}
+
+#dashboard .center .player-info {
+  display: flex;
+  gap: 1.6rem;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#dashboard .center .player-info > div {
+  flex: 0 0 calc(25% - 1.6rem);
+  max-width: calc(25% - 1.6rem);
+  min-width: 260px;
+  opacity: 0;
+  background: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  margin-top: 1rem;
+  box-shadow: var(--box-shadow);
+  transition: all 300ms ease;
+  animation: flyInLeft 1s ease-out forwards;
+  animation-delay: var(--animation-delay);
+}
+
+#dashboard .center .player-info > div:hover {
+  box-shadow: none;
+}
+
+#dashboard .center .player-info > div i {
+  background: var(--background-icon); 
+  padding: 0.5rem;
+  border-radius: 50%;
+  color: var(--color-white);
+  font-size: 16px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#dashboard .center .player-info > div .middle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#dashboard .center .player-info h3 {
+  margin: 1rem 0 0.6rem;
+  font-size: 1rem;
+}
+
+#dashboard .center .player-info small {
+  margin-top: 1.3rem;
+  display: block;
+}
+
+#dashboard .center .now-playing {
+  width: 100%;
+  max-width: 660px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  transition: all 300ms ease;
+  animation: flyInLeft 1.2s ease forwards;
+  position: relative;
+}
+
+#dashboard .center .now-playing .background-cover {
+  object-fit: cover;
+  position: absolute;
+  z-index: -1;
+  border-radius: var(--card-border-radius);
+  filter: brightness(0.3);
+  display: flex;
+}
+
+#dashboard .center .now-playing > div {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+#dashboard .center .now-playing > div:first-of-type {
+  margin-top: 16px;
+}
+
+#dashboard .center .now-playing h1 {
+  font-weight: 600;
+  font-size: 32px;
+}
+
+#dashboard .center .now-playing h3,
+#dashboard .center .now-playing a {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#dashboard .center .now-playing h3.hover-text,
+#dashboard .center .now-playing a {
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+#dashboard .center .now-playing h3.hover-text:hover,
+#dashboard .center .now-playing a:hover {
+  color: var(--color-success);
+}
+
+#dashboard .center .now-playing .next-song {
+  display: none;
+}
+
+#dashboard .center .now-playing .next-song.active {
+  display: unset;
+}
+
+#dashboard .center .now-playing .duration {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+#dashboard .center .now-playing .duration .navigation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+#dashboard .center .now-playing .duration .navigation:hover {
+  & .passed-timeline.active {
+    background-color: var(--color-success);
+  }
+
+  & .passed-timeline.active .btn {
+    display: unset;
+  }
+}
+
+#dashboard .center .now-playing .duration .passed-timeline {
+  display: none;
+}
+
+#dashboard .center .now-playing .duration .passed-timeline.active {
+  display: unset;
+  position: relative;
+  height: 3px;
+  width: var(--width);
+  background-color: var(--color-dark);
+  border-radius: 8px;
+  transition: width 200ms ease-in-out;
+}
+
+#dashboard .center .now-playing .duration .passed-timeline.active .btn {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  z-index: 10;
+  display: none;
+}
+
+#dashboard .center .now-playing .duration .timeline:not(.active) {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: var(--color-primary);
+}
+
+#dashboard .center .now-playing .duration .timeline:not(.active):hover {
+  color: var(--color-success);
+}
+
+#dashboard .center .now-playing .duration .timeline.active {
+  height: 3px;
+  width: var(--width);
+  background-color: var(--color-dark);
+  filter: brightness(0.5);
+  cursor: pointer;
+  border-radius: 0 8px 8px 0;
+  transition: width 200ms ease-in-out;
+}
+
+#dashboard .center .now-playing .duration .time {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: -16px;
+}
+
+#dashboard .center .controller {
+  display: none;
+  background-color: transparent;
+  border-radius: 8px;
+  margin-top: 8px;
+  opacity: 0;
+  animation: fade 1200ms ease-in-out forwards;
+  width: 100%;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+#dashboard .center .controller.active {
+  display: flex;
+}
+
+#dashboard .center .controller > li {
+  cursor: pointer;
+  transition: 200ms filter ease-in-out;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#dashboard .center .controller > li:not(.disable):not(.temp-disable):hover {
+  filter: brightness(0.7);
+}
+
+#dashboard .center .controller > li#play-btn {
+  border-radius: 50%;
+  background-color: var(--color-dark);
+
+  & i {
+    color: var(--color-white);
+    filter: brightness(1.5);
+  }
+}
+
+#dashboard .center .controller > li i {
+  font-size: 24px;
+}
+
+#dashboard .center .controller > li.disable,
+#dashboard .center .controller > li.temp-disable {
+  cursor: not-allowed;
+  filter: brightness(0.5);
+}
+
+/* ========== MEDIA QUERIES ========== */
+@media screen and (max-width: 911px) {
+  #dashboard .center .player-info > div {
+    max-width: 100%;
+    flex: 1; 
+  }
+}
