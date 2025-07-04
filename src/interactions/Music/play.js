@@ -34,7 +34,6 @@ module.exports = {
 
     const searchingMessage = await interaction.reply({
       embeds: [searchingEmbed],
-      ephemeral: false,
     });
 
     try {
@@ -124,7 +123,6 @@ module.exports = {
       searchingMessage.edit({
         embeds: [embed],
         components: [row, closeRow],
-        ephemeral: false,
       });
     } catch (error) {
       const errorEmbed = new EmbedBuilder({

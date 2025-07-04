@@ -5,6 +5,7 @@ const { YtDlpPlugin } = require("@distube/yt-dlp");
 const { DeezerPlugin } = require("@distube/deezer");
 const { Collection } = require("discord.js");
 const { StreamType } = require("distube");
+const ffmpegPath = require("ffmpeg-static");
 
 module.exports = (client) => {
   const distube = new DisTube(client, {
@@ -27,9 +28,15 @@ module.exports = (client) => {
       new YtDlpPlugin({ update: true }),
       new DeezerPlugin(),
     ],
+    ffmpeg: {
+      path: ffmpegPath,
+    },
     customFilters: client.config.music.filters,
     streamType: StreamType.OPUS,
     joinNewVoiceChannel: false,
+    ytdlOptions: {
+      quality: "highestaudio",
+    },
   });
 
   client.distube = distube;
