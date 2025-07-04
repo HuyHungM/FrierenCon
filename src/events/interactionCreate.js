@@ -8,7 +8,7 @@ module.exports = (client) => {
     if (!interaction.inGuild())
       return interaction.reply({
         content: "Slash Command chỉ có thể sử dụng trong server",
-        ephemeral: true,
+        flags: 64,
       });
 
     const { commandName } = interaction;

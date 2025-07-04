@@ -17,15 +17,14 @@ module.exports = {
   run: async (client, interaction, args) => {
     const queue = client.distube.getQueue(interaction);
 
-    if (!queue)
-      return interaction.reply({ embeds: [noMusicEmbed], ephemeral: true });
+    if (!queue) return interaction.reply({ embeds: [noMusicEmbed], flags: 64 });
 
     if (queue.paused) {
       const embed = new EmbedBuilder({
         description: `${client.config.emotes.error} **Bài hát hiện đã tạm dừng!**`,
       }).setColor(client.config.getEmbedConfig().color);
 
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: 64 });
     }
 
     try {
@@ -134,7 +133,7 @@ module.exports = {
       const embed = new EmbedBuilder({
         description: `${client.config.emotes.error} **Đã xảy ra lỗi!**`,
       }).setColor(client.config.getEmbedConfig().errorColor);
-      interaction.reply({ embeds: [embed], ephemeral: true });
+      interaction.reply({ embeds: [embed], flags: 64 });
       console.error(error);
     }
   },

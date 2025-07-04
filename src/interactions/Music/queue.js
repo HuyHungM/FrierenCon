@@ -18,8 +18,7 @@ module.exports = {
   options: [],
   run: async (client, interaction) => {
     const queue = await client.distube.getQueue(interaction);
-    if (!queue)
-      return interaction.reply({ embeds: [noMusicEmbed], ephemeral: true });
+    if (!queue) return interaction.reply({ embeds: [noMusicEmbed], flags: 64 });
 
     const waitingMessageEmbed = new EmbedBuilder({
       description: `🔎 **Đang tải...**`,

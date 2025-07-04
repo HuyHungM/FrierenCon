@@ -67,7 +67,7 @@ function getAll(client, interaction) {
     client.config.getEmbedConfig().color
   );
 
-  return interaction.reply({ embeds: [embed], ephemeral: true });
+  return interaction.reply({ embeds: [embed], flags: 64 });
 }
 
 function getCMD(client, interaction) {
@@ -89,7 +89,7 @@ function getCMD(client, interaction) {
     const embed = new EmbedBuilder(embedData).setColor(
       client.config.getEmbedConfig().errorColor
     );
-    return interaction.reply({ embeds: [embed], ephemeral: true });
+    return interaction.reply({ embeds: [embed], flags: 64 });
   }
 
   if (cmd.name) info = `**Tên lệnh**: \`${cmd.name}\``;
@@ -108,5 +108,5 @@ function getCMD(client, interaction) {
   const embed = new EmbedBuilder(embedData).setColor(
     client.config.getEmbedConfig().color
   );
-  return interaction.reply({ embeds: [embed], ephemeral: true });
+  return interaction.reply({ embeds: [embed], flags: 64 });
 }

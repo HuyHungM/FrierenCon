@@ -64,7 +64,7 @@ module.exports = {
         const embed = new EmbedBuilder({
           description: `${client.config.emotes.error} **Không tìm thấy kết quả nào cho** \`${songQuery}\` **!**`,
         }).setColor(client.config.getEmbedConfig().color);
-        return interaction.reply({ embeds: [embed], ephemeral: true });
+        return interaction.reply({ embeds: [embed], flags: 64 });
       }
 
       // Create Embed
@@ -133,7 +133,7 @@ module.exports = {
       searchingMessage.edit({
         embeds: [errorEmbed],
         components: [],
-        ephemeral: true,
+        flags: 64,
       });
       console.error(error);
     }

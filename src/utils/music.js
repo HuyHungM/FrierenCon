@@ -7,7 +7,7 @@ const checkSameRoom = ({ message, interaction, client }) => {
     if (!message.member.voice.channelId) {
       return message.reply({
         content: "Bạn phải vào kênh thoại để sử dụng lệnh này!",
-        ephemeral: true,
+        flags: 64,
       });
     }
 
@@ -20,14 +20,14 @@ const checkSameRoom = ({ message, interaction, client }) => {
     else {
       return message.reply({
         content: "Bạn phải vào chung phòng với bot để sử dụng lệnh này!",
-        ephemeral: true,
+        flags: 64,
       });
     }
   } else {
     if (!interaction.member.voice.channelId)
       return interaction.reply({
         content: "Bạn phải vào kênh thoại để sử dụng lệnh này!",
-        ephemeral: true,
+        flags: 64,
       });
 
     if (
@@ -39,7 +39,7 @@ const checkSameRoom = ({ message, interaction, client }) => {
     else {
       return interaction.reply({
         content: "Bạn phải vào chung phòng với bot để sử dụng lệnh này!",
-        ephemeral: true,
+        flags: 64,
       });
     }
   }

@@ -12,13 +12,13 @@ module.exports = {
     if (!waifuData)
       return interaction.reply({
         content: `Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh ${process.env.PREFIX}waifu-create.`,
-        ephemeral: true,
+        flags: 64,
       });
 
     interaction.user.createDM();
     interaction.reply({
       content: `Bạn có thể qua <@${client.user.id}> để chat tiếp.`,
-      ephemeral: true,
+      flags: 64,
     });
   },
 };

@@ -26,7 +26,7 @@ module.exports = {
       return interaction.reply({
         content:
           "Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh waifu-create.",
-        ephemeral: true,
+        flags: 64,
       });
 
     const message = interaction.options.get("message");
@@ -34,13 +34,13 @@ module.exports = {
     if (message.value.length > 256)
       return interaction.reply({
         content: "Giới hạn kí tự 256.",
-        ephemeral: true,
+        flags: 64,
       });
 
     if (!waifuData?.isReplied) return;
 
     try {
-      interaction.reply({ content: "`Đang soạn...`", ephemeral: true });
+      interaction.reply({ content: "`Đang soạn...`", flags: 64 });
       waifuData.messages.push({ role: "user", content: message.value });
       const res = await client.waifuai.createMessage({
         messages: waifuData.messages,
@@ -54,7 +54,7 @@ module.exports = {
 
       interaction.editReply(res.choices[0].message.content);
     } catch (error) {
-      interaction.reply({ content: "Đã xảy ra lỗi", ephemeral: true });
+      interaction.reply({ content: "Đã xảy ra lỗi", flags: 64 });
       console.error(error);
     }
   },

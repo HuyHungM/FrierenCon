@@ -24,7 +24,7 @@ module.exports = {
       }).setColor(client.config.getEmbedConfig().errorColor);
       interaction.reply({
         embeds: [embed],
-        ephemeral: true,
+        flags: 64,
       });
       console.error(error);
     }

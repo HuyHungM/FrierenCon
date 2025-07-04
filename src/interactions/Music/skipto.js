@@ -22,8 +22,7 @@ module.exports = {
   run: async (client, interaction) => {
     const queue = client.distube.getQueue(interaction);
 
-    if (!queue)
-      return interaction.reply({ embeds: [noMusicEmbed], ephemeral: true });
+    if (!queue) return interaction.reply({ embeds: [noMusicEmbed], flags: 64 });
 
     const position = interaction.options.get("position").value;
 
@@ -32,7 +31,7 @@ module.exports = {
         description: `${client.config.emotes.error} **Vị trí không hợp lệ!** \`1 - ${queue.songs.length}\``,
       }).setColor(client.config.getEmbedConfig().color);
 
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: 64 });
     }
 
     try {
@@ -45,13 +44,13 @@ module.exports = {
           }\`**!**\n**Hàng đợi còn** \`${queue.songs.length - 1}\` bài`,
         }).setColor(client.config.getEmbedConfig().color);
 
-        interaction.reply({ embeds: [embed], ephemeral: true });
+        interaction.reply({ embeds: [embed], flags: 64 });
       }
     } catch (error) {
       const embed = new EmbedBuilder({
         description: `${client.config.emotes.error} **Đã xảy ra lỗi!**`,
       }).setColor(client.config.getEmbedConfig().errorColor);
-      interaction.reply({ embeds: [embed], ephemeral: true });
+      interaction.reply({ embeds: [embed], flags: 64 });
       console.error(error);
     }
   },

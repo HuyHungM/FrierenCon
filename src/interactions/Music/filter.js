@@ -57,8 +57,7 @@ module.exports = {
   run: async (client, interaction) => {
     const queue = client.distube.getQueue(interaction);
 
-    if (!queue)
-      return interaction.reply({ embeds: [noMusicEmbed], ephemeral: true });
+    if (!queue) return interaction.reply({ embeds: [noMusicEmbed], flags: 64 });
     const subCommand = interaction.options.data[0];
     const filter = subCommand.options[0]?.value;
 
@@ -74,14 +73,14 @@ module.exports = {
               ", "
             )}\``,
             }).setColor(client.config.getEmbedConfig().color);
-            interaction.reply({ embeds: [addEmbed], ephemeral: true });
+            interaction.reply({ embeds: [addEmbed], flags: 64 });
           } else {
             const unavailableEmbed = new EmbedBuilder({
               title: "Không phải filter hợp lệ",
               description: `**Các filter hợp lệ gồm:**
               \n\`${Object.keys(client.distube.filters).join(" | ")}\``,
             }).setColor(client.config.getEmbedConfig().color);
-            interaction.reply({ embeds: [unavailableEmbed], ephemeral: true });
+            interaction.reply({ embeds: [unavailableEmbed], flags: 64 });
           }
           break;
 
@@ -99,14 +98,14 @@ module.exports = {
                 : `${client.config.emotes.success} **Hiện không có filter nào đang bật!**`
             }`,
             }).setColor(client.config.getEmbedConfig().color);
-            interaction.reply({ embeds: [removeEmbed], ephemeral: true });
+            interaction.reply({ embeds: [removeEmbed], flags: 64 });
           } else {
             const unavailableEmbed = new EmbedBuilder({
               title: "Không phải filter hợp lệ",
               description: `**Các filter hợp lệ gồm:**
               \n\`${Object.keys(client.distube.filters).join(" | ")}\``,
             }).setColor(client.config.getEmbedConfig().color);
-            interaction.reply({ embeds: [unavailableEmbed], ephemeral: true });
+            interaction.reply({ embeds: [unavailableEmbed], flags: 64 });
           }
           break;
 
@@ -115,7 +114,7 @@ module.exports = {
           const clearEmbed = new EmbedBuilder({
             description: `${client.config.emotes.success} **Đã tắt filter!**`,
           }).setColor(client.config.getEmbedConfig().color);
-          interaction.reply({ embeds: [clearEmbed], ephemeral: true });
+          interaction.reply({ embeds: [clearEmbed], flags: 64 });
           break;
 
         case filterSubCommand.ACTIVES:
@@ -128,7 +127,7 @@ module.exports = {
                 : `${client.config.emotes.success} **Hiện không có filter nào đang bật!**`
             }`,
           }).setColor(client.config.getEmbedConfig().color);
-          interaction.reply({ embeds: [activesEmbed], ephemeral: true });
+          interaction.reply({ embeds: [activesEmbed], flags: 64 });
           break;
 
         case filterSubCommand.LIST:
@@ -136,14 +135,14 @@ module.exports = {
             description: `${client.config.emotes.success} **Các loại filter:** 
           \n\`${Object.keys(client.distube.filters).join(" | ")}\``,
           }).setColor(client.config.getEmbedConfig().color);
-          interaction.reply({ embeds: [listEmbed], ephemeral: true });
+          interaction.reply({ embeds: [listEmbed], flags: 64 });
           break;
       }
     } catch (error) {
       const embed = new EmbedBuilder({
         description: `${client.config.emotes.error} **Đã xảy ra lỗi!**`,
       }).setColor(client.config.getEmbedConfig().errorColor);
-      interaction.reply({ embeds: [embed], ephemeral: true });
+      interaction.reply({ embeds: [embed], flags: 64 });
       console.error(error);
     }
   },

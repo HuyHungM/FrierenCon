@@ -22,7 +22,7 @@ module.exports = {
       return interaction.reply({
         content:
           "Bạn đã khởi tạo waifu cho riêng mình. Vui lòng dùng lệnh waifu-delete để tạo mới.",
-        ephemeral: true,
+        flags: 64,
       });
 
     try {
@@ -41,14 +41,14 @@ module.exports = {
         }\`\nGiờ đây bạn có thể chat với em ấy với lệnh ${
           process.env.PREFIX
         }chat hoặc <@${client.user.id}>`,
-        ephemeral: true,
+        flags: 64,
       });
       interaction.user.createDM();
       interaction.user.send("Chào anh nhé :heart:");
     } catch (error) {
       interaction.reply({
         content: "Đã xảy ra lỗi khi khởi tạo waifu cho bạn.",
-        ephemeral: true,
+        flags: 64,
       });
       console.error(error);
     }

@@ -14,7 +14,7 @@ module.exports = {
       const embed = new EmbedBuilder({
         description: `${client.config.emotes.error} **Đã xảy ra lỗi!**`,
       }).setColor(client.config.getEmbedConfig().errorColor);
-      interaction.reply({ embeds: [embed], ephemeral: true });
+      interaction.reply({ embeds: [embed], flags: 64 });
       console.error(error);
     }
   },

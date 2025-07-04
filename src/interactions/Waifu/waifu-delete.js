@@ -14,7 +14,7 @@ module.exports = {
     if (!waifuData)
       return interaction.reply({
         content: "Waifu của bạn chưa tồn tại",
-        ephemeral: true,
+        flags: 64,
       });
 
     try {
@@ -35,17 +35,17 @@ module.exports = {
       if (deleteWaifuData == 1)
         interaction.reply({
           content: `Đã xoá thành công waifu của bạn.`,
-          ephemeral: true,
+          flags: 64,
         });
       else
         interaction.reply({
           content: "Đã xảy ra lỗi khi xoá waifu cho bạn.",
-          ephemeral: true,
+          flags: 64,
         });
     } catch (error) {
       interaction.reply({
         content: "Đã xảy ra lỗi khi xoá waifu cho bạn.",
-        ephemeral: true,
+        flags: 64,
       });
       console.error(error);
     }

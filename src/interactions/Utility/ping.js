@@ -55,6 +55,6 @@ module.exports = {
       client.config.getEmbedConfig().color
     );
 
-    interaction.reply({ embeds: [embed], ephemeral: true });
+    interaction.reply({ embeds: [embed], flags: 64 });
   },
 };
