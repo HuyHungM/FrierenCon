@@ -1,5 +1,6 @@
 {
   "name": "waifubot",
+  "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2025-07-04",
   "main": "./index.js",
   "assets": {
