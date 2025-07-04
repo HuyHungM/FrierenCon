@@ -8,10 +8,10 @@ module.exports = async (client) => {
     options: interaction.options || [],
   }));
 
-  const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
+  const rest = new REST({ version: "10" }).setToken(env.TOKEN);
 
   try {
-    await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
+    await rest.put(Routes.applicationCommands(env.CLIENT_ID), {
       body: interactionData,
     });
   } catch (error) {

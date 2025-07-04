@@ -22,7 +22,7 @@ module.exports = {
       ) {
         const embed = new EmbedBuilder({
           description: `${client.config.emotes.error} **Lệnh không hợp lệ!**
-          \n**Ví dụ:** \`${process.env.PREFIX}filter <add/remove/clear/actives/list> [tên filter]\``,
+          \n**Ví dụ:** \`${env.PREFIX}filter <add/remove/clear/actives/list> [tên filter]\``,
         }).setColor(client.config.getEmbedConfig().color);
         return message.reply({ embeds: [embed] });
       }

@@ -44,7 +44,7 @@ function getAll(client, interaction) {
     .reduce((string, category) => string + "\n\n" + category);
 
   let embedData = {
-    title: `Sử dụng lệnh ${process.env.PREFIX}help để xem chi tiết\nPrefix: \`${process.env.PREFIX}\`\nTổng cộng có \`${client.commands.size}\` lệnh`,
+    title: `Sử dụng lệnh ${env.PREFIX}help để xem chi tiết\nPrefix: \`${env.PREFIX}\`\nTổng cộng có \`${client.commands.size}\` lệnh`,
     thumbnail: {
       url: client.user.displayAvatarURL({ dynamic: true }),
     },
@@ -52,7 +52,7 @@ function getAll(client, interaction) {
     fields: [
       {
         name: `Version: v${packageJson.version}`,
-        value: `✨ [Support Server](${process.env.SUPPORT_SERVER}) | [Dashboard](${process.env.DOMAIN}) | By ${client.config.ownerName}`,
+        value: `✨ [Support Server](${env.SUPPORT_SERVER}) | [Dashboard](${env.DOMAIN}) | By ${client.config.ownerName}`,
         inline: false,
       },
     ],
@@ -99,7 +99,7 @@ function getCMD(client, interaction) {
       .join(", ")}`;
   if (cmd.description) info += `\n**Chi tiết lệnh**: \`${cmd.description}\``;
   if (cmd.usage) {
-    info += `\n**Cách sử dụng lệnh**: \`${process.env.PREFIX}${cmd.usage}\``;
+    info += `\n**Cách sử dụng lệnh**: \`${env.PREFIX}${cmd.usage}\``;
     embedData.footer.text = "Cú pháp: <> = bắt buộc, [] = không phải bắt buộc";
   }
 

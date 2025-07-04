@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
 
 module.exports = async (client) => {
-  mongoose.connect(process.env.MONGO_STRING);
+  mongoose.connect(env.MONGO_STRING);
 };

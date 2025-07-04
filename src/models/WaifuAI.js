@@ -7,8 +7,8 @@ class WaifuAI {
     this.apiKey = apiKey;
 
     const openai = new OpenAI({
-      apiKey: process.env.AI_API_KEY,
-      baseURL: process.env.BASE_AI_URL,
+      apiKey: env.AI_API_KEY,
+      baseURL: env.BASE_AI_URL,
     });
 
     this.openai = openai;
