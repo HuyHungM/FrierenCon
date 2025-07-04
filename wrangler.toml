@@ -1,0 +1,5 @@
+name = "waifubot"
+type = "javascript"
+
+compatibility_date = "2025-07-04"
+compatibility_flags = ["nodejs_compat"]
