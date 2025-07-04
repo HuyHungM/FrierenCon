@@ -1,6 +1,7 @@
 const express = require("express");
 const { static } = require("express");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
@@ -27,6 +28,11 @@ module.exports = (client) => {
           maxAge: 1000 * 60 * 60 * 24 * 30,
           httpOnly: true,
         },
+        store: MongoStore.create({
+          mongoUrl: process.env.MONGO_STRING,
+          collectionName: "sessions",
+          ttl: 60 * 60 * 24,
+        }),
       })
     );
 
