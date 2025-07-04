@@ -28,7 +28,7 @@ module.exports = {
         `Đã khởi tạo thành công waifu của bạn với tên \`${args.join(
           " "
         )}\`\nGiờ đây bạn có thể chat với em ấy với lệnh ${
-          env.PREFIX
+          process.env.PREFIX
         }chat hoặc <@${client.user.id}>`
       );
 

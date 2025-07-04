@@ -8,7 +8,7 @@ module.exports = (client) => {
     client.user.setPresence({
       activities: [
         {
-          name: `nhạc | ${env.PREFIX}help`,
+          name: `nhạc | ${process.env.PREFIX}help`,
           type: ActivityType.Playing,
         },
       ],

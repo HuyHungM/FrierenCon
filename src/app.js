@@ -34,4 +34,4 @@ readdirSync("./src/handlers")
     require(`./handlers/${handler}`)(client);
   });
 
-client.login(env.TOKEN);
+client.login(process.env.TOKEN);

@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
     {
       client,
       moment,
-      callbackURL: env.DOMAIN + env.CALLBACK_URL,
+      callbackURL: process.env.DOMAIN + process.env.CALLBACK_URL,
     },
     (err, html) => {
       if (err) {
@@ -44,7 +44,7 @@ app.get("/servers", Auth, (req, res) => {
     "./src/dashboard/views/servers.html",
     {
       client,
-      domain: env.DOMAIN,
+      domain: process.env.DOMAIN,
       user,
       moment,
     },
@@ -153,7 +153,7 @@ app.get("/server/:guildId/music/queue", Auth, validGuild, (req, res) => {
 app.get("/login", UnAuth, (req, res) => {
   ejs.renderFile(
     "./src/dashboard/views/login.html",
-    { client, callbackURL: env.CALLBACK_URL },
+    { client, callbackURL: process.env.CALLBACK_URL },
     (err, html) => {
       if (err) {
         console.error(err);

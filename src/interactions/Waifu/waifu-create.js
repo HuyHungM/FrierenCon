@@ -39,7 +39,7 @@ module.exports = {
         content: `Đã khởi tạo thành công waifu của bạn với tên \`${
           interaction.options.get("name").value
         }\`\nGiờ đây bạn có thể chat với em ấy với lệnh ${
-          env.PREFIX
+          process.env.PREFIX
         }chat hoặc <@${client.user.id}>`,
         ephemeral: true,
       });

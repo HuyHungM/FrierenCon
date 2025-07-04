@@ -11,7 +11,7 @@ module.exports = {
     let waifuData = await client.waifuai.find({ ownerID: interaction.user.id });
     if (!waifuData)
       return interaction.reply({
-        content: `Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh ${env.PREFIX}waifu-create.`,
+        content: `Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh ${process.env.PREFIX}waifu-create.`,
         ephemeral: true,
       });
 

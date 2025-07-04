@@ -20,7 +20,7 @@ module.exports = (client) => {
 
     app.use(
       session({
-        secret: env.SESSION_SECRET,
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
         cookie: {
@@ -44,9 +44,9 @@ module.exports = (client) => {
     passport.use(
       new DiscordStrategy(
         {
-          clientID: env.CLIENT_ID,
-          clientSecret: env.CLIENT_SECRET_ID,
-          callbackURL: `${env.DOMAIN}${env.CALLBACK_URL}`,
+          clientID: process.env.CLIENT_ID,
+          clientSecret: process.env.CLIENT_SECRET_ID,
+          callbackURL: `${process.env.DOMAIN}${process.env.CALLBACK_URL}`,
           scope: `${OAuth2Scopes.Identify} ${OAuth2Scopes.Guilds} ${OAuth2Scopes.GuildsJoin} ${OAuth2Scopes.Email}`,
         },
         function (accessToken, refreshToken, profile, done) {
@@ -58,9 +58,9 @@ module.exports = (client) => {
     );
 
     app.get(
-      env.CALLBACK_URL,
+      process.env.CALLBACK_URL,
       passport.authenticate("discord", {
-        failureRedirect: env.FAILURE_REDIRECT,
+        failureRedirect: process.env.FAILURE_REDIRECT,
       }),
       function (req, res) {
         res.redirect("/servers");
@@ -93,9 +93,9 @@ module.exports = (client) => {
       );
     });
 
-    server.listen(env.PORT, () =>
+    server.listen(process.env.PORT, () =>
       console.log(
-        `🟢 [DASHBOARD]: Dashboard đã được mở tại địa chỉ ${env.DOMAIN}`
+        `🟢 [DASHBOARD]: Dashboard đã được mở tại địa chỉ ${process.env.DOMAIN}`
       )
     );
     app.set("view engine", "ejs");
