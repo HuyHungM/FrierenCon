@@ -1,8 +1,4 @@
-const {
-  EmbedBuilder,
-  ApplicationCommandType,
-  ApplicationCommandOptionType,
-} = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { stripIndent } = require("common-tags");
 const packageJson = require("../../../package.json");
 const { commandCategory } = require("../../utils/other");

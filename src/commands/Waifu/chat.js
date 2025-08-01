@@ -1,5 +1,4 @@
 const { model } = require("../../config/AIConfig");
-const { ownerName } = require("../../config/config");
 const { commandCategory } = require("../../utils/other");
 
 module.exports = {

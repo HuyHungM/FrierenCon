@@ -24,7 +24,10 @@ module.exports = (client) => {
         },
         emitEventsAfterFetching: true,
       }),
-      new SoundCloudPlugin(),
+      new SoundCloudPlugin({
+        clientId: process.env.SOUNDCLOUD_ID,
+        oauthToken: process.env.SOUNDCLOUD_SECRET,
+      }),
       new YtDlpPlugin({ update: false }),
       new DeezerPlugin(),
     ],

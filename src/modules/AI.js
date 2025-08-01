@@ -1,4 +1,4 @@
-const { WaifuAI } = require("../models/WaifuAI");
+const { WaifuAI } = require("../functions/WaifuAI");
 
 module.exports = async (client) => {
   const waifuai = new WaifuAI({

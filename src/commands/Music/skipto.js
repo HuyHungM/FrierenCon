@@ -7,7 +7,7 @@ module.exports = {
   aliases: [],
   category: commandCategory.MUSIC,
   description: "Bỏ qua bài hát đến một vị trí nhất định",
-  usage: `skipto [Vị tí]`,
+  usage: `skipto <Vị trí>`,
   run: async (client, message, args) => {
     const queue = client.distube.getQueue(message);
 

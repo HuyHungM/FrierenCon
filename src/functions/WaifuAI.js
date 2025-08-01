@@ -1,4 +1,4 @@
-const waifu = require("./waifu");
+const waifu = require("../models/waifu");
 const OpenAI = require("openai");
 
 class WaifuAI {
