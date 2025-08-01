@@ -19,7 +19,9 @@ module.exports = {
   usage: "slot <số tiền>",
   run: async (client, message, args) => {
     if (!args[0] || isNaN(args[0]))
-      return message.reply(`❌ Dùng: \`${process.env.PREFIX}slot <số tiền>\``);
+      return message.reply(
+        `❌ Dùng: \`${process.env.BOT_PREFIX}slot <số tiền>\``
+      );
 
     let bet = parseInt(args[0]);
     if (bet <= 0) return message.reply("❌ Số tiền phải lớn hơn 0.");

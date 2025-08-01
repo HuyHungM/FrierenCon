@@ -84,7 +84,7 @@ module.exports = {
   run: async (client, message, args) => {
     if (!args[0] || isNaN(args[0]))
       return message.reply(
-        `❌ Dùng: \`${process.env.PREFIX}xidach <số tiền>\``
+        `❌ Dùng: \`${process.env.BOT_PREFIX}xidach <số tiền>\``
       );
 
     let bet = parseInt(args[0]);

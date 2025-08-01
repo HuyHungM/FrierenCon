@@ -13,7 +13,7 @@ module.exports = {
 
     if (!["tai", "xiu"].includes(betChoice))
       return message.reply(
-        `${client.config.emotes.error} Cú pháp: \`${process.env.PREFIX}taixiu <tai/xiu> <số tiền>\``
+        `${client.config.emotes.error} Cú pháp: \`${process.env.BOT_PREFIX}taixiu <tai/xiu> <số tiền>\``
       );
 
     if (isNaN(betMoney) || betMoney <= 0)

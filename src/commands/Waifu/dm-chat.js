@@ -10,7 +10,7 @@ module.exports = {
     let waifuData = await client.waifuai.find({ ownerID: message.author.id });
     if (!waifuData)
       return message.reply(
-        `Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh ${process.env.PREFIX}waifu-create.`
+        `Bạn chưa khởi tạo waifu cho mình. Vui lòng dùng lênh ${process.env.BOT_PREFIX}waifu-create.`
       );
 
     message.author.createDM();

@@ -33,7 +33,7 @@ function getAll(client, message) {
     .reduce((string, category) => string + "\n\n" + category);
 
   let embedData = {
-    title: `Sử dụng lệnh ${process.env.PREFIX}help để xem chi tiết\nPrefix: \`${process.env.PREFIX}\`\nTổng cộng có \`${client.commands.size}\` lệnh`,
+    title: `Sử dụng lệnh ${process.env.BOT_PREFIX}help để xem chi tiết\nPrefix: \`${process.env.BOT_PREFIX}\`\nTổng cộng có \`${client.commands.size}\` lệnh`,
     thumbnail: {
       url: client.user.displayAvatarURL({ dynamic: true }),
     },
@@ -85,7 +85,7 @@ function getCMD(client, message, input) {
       .join(", ")}`;
   if (cmd.description) info += `\n**Chi tiết lệnh**: \`${cmd.description}\``;
   if (cmd.usage) {
-    info += `\n**Cách sử dụng lệnh**: \`${process.env.PREFIX}${cmd.usage}\``;
+    info += `\n**Cách sử dụng lệnh**: \`${process.env.BOT_PREFIX}${cmd.usage}\``;
     embedData.footer.text = "Cú pháp: <> = bắt buộc, [] = không phải bắt buộc";
   }
 

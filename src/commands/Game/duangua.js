@@ -10,7 +10,7 @@ module.exports = {
   run: async (client, message, args) => {
     if (args.length < 2 || isNaN(args[0]) || isNaN(args[1]))
       return message.reply(
-        `❌ Dùng: \`${process.env.PREFIX}duangua <ngựa (1-4)> <số tiền>\``
+        `❌ Dùng: \`${process.env.BOT_PREFIX}duangua <ngựa (1-4)> <số tiền>\``
       );
 
     const choice = parseInt(args[0]);

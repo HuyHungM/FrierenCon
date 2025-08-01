@@ -13,7 +13,7 @@ module.exports = {
     if (args.length < 2)
       return message.reply(
         `${client.config.emotes.error} Vui lòng thực hiện theo cú pháp ${
-          process.env.PREFIX
+          process.env.BOT_PREFIX
         }baucua <${choices.join("/")} ...> <số tiền>`
       );
 
