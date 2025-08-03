@@ -1,6 +1,6 @@
 const { version } = require("../../../package.json");
 const ms = require("ms");
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, version: discordjsVersion } = require("discord.js");
 const os = require("os-utils");
 const process = require("process");
 const { commandCategory } = require("../../utils/other.js");
@@ -9,41 +9,68 @@ module.exports = {
   name: "botinfo",
   category: commandCategory.UTILITY,
   aliases: ["binfo", "botstats", "stats"],
-  description: "Kiểm tra trạng thái của`Bot` ",
+  description: "Kiểm tra trạng thái của `Bot`",
   usage: `botinfo`,
   run: async (client, message, args) => {
     os.cpuUsage(function (cpuUsage) {
       const embed = new EmbedBuilder()
         .setColor(client.config.getEmbedConfig().color)
-        .setAuthor(
-          `Thông tin ${client.user.username}`,
-          client.user.displayAvatarURL()
-        )
+        .setAuthor({
+          iconURL: client.user.displayAvatarURL({ dynamic: true }),
+          name: `Thông tin ${client.user.username}`,
+        })
         .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
-        .addField("❯ Phiên bản:", `\`v${version}\``)
-        .addField("❯ Thời gian hoạt động :", `\`${ms(client.uptime)}\``, true)
-        .addField("❯ WebSocket Ping:", `\`${client.ws.ping}ms\``, true)
-        .addField("❯ CPU:", `\`${(cpuUsage * 100).toFixed(2)}%\``, true)
-        .addField(
-          "❯ Bộ nhớ:",
-          `\`${(process.memoryUsage().rss / 1024 / 1024).toFixed(
-            2
-          )} / 512 MB\``,
-          true
+        .addFields(
+          { name: "❯ Phiên bản:", value: `\`v${version}\``, inline: false },
+          {
+            name: "❯ Thời gian hoạt động:",
+            value: `\`${ms(client.uptime)}\``,
+            inline: true,
+          },
+          {
+            name: "❯ WebSocket Ping:",
+            value: `\`${client.ws.ping}ms\``,
+            inline: true,
+          },
+          {
+            name: "❯ CPU:",
+            value: `\`${(cpuUsage * 100).toFixed(2)}%\``,
+            inline: true,
+          },
+          {
+            name: "❯ Bộ nhớ:",
+            value: `\`${(process.memoryUsage().rss / 1024 / 1024).toFixed(
+              2
+            )} / 512 MB\``,
+            inline: true,
+          },
+          {
+            name: "❯ Lệnh:",
+            value: `\`${client.commands.size} cmds\``,
+            inline: true,
+          },
+          {
+            name: "❯ Node:",
+            value: `\`${process.version} ${process.arch}\``,
+            inline: true,
+          },
+          {
+            name: "❯ Discord.js:",
+            value: `\`v${discordjsVersion}\``,
+            inline: true,
+          },
+          {
+            name: "❯ Nền tảng:",
+            value: `\`${process.platform} ${process.arch}\``,
+            inline: true,
+          }
         )
-        .addField("❯ Lệnh:", `\`${client.commands.size} cmds\``, true)
-        .addField("❯ Node:", `\`${process.version} ${process.arch}\``, true)
-        .addField("❯ Discord.js:", `\`v${discordjsVersion}\``, true)
-        .addField(
-          "❯ Nền tảng:",
-          `\`${process.platform} ${process.arch}\``,
-          true
-        )
-        .setFooter(client.config.getEmbedConfig().color)
+        .setFooter({
+          text: client.config.getEmbedConfig().footer || "Bot Info",
+        })
         .setTimestamp();
-      message.channel.send({
-        embeds: [embed],
-      });
+
+      message.channel.send({ embeds: [embed] });
     });
   },
 };
