@@ -1,4 +1,5 @@
 const {
+  ApplicationCommandType,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
@@ -8,27 +9,42 @@ const { commandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "caro",
-  aliases: ["gomoku", "tic5"],
   category: commandCategory.GAME,
-  description: "Chơi caro 5x5 (gomoku)",
-  usage: "caro [@người chơi]",
-  run: async (client, message, args) => {
-    let opponent = message.mentions.users.first() || client.user; // Nếu không tag thì chơi với bot
+  description: "Chơi Caro 5x5 (gomoku)",
+  type: ApplicationCommandType.ChatInput,
+  options: [
+    {
+      name: "opponent",
+      description: "Người chơi cùng bạn (mặc định là bot)",
+      type: 6, // USER
+      required: false,
+    },
+  ],
+
+  run: async (client, interaction) => {
+    let opponent = interaction.options.getUser("opponent") || client.user;
 
     if (opponent.bot && opponent.id !== client.user.id) {
-      return message.reply("❌ Bạn không thể chơi với bot khác!");
+      return interaction.reply({
+        content: "❌ Bạn không thể chơi với bot khác!",
+        flags: 64,
+      });
     }
-    if (opponent.id === message.author.id) {
-      return message.reply("❌ Không thể chơi với chính mình!");
+    if (opponent.id === interaction.user.id) {
+      return interaction.reply({
+        content: "❌ Không thể chơi với chính mình!",
+        flags: 64,
+      });
     }
 
     const size = 5;
     const board = Array(size * size).fill(null);
-    let current = message.author.id;
+    let current = interaction.user.id;
     let symbols = {
-      [message.author.id]: "❌",
+      [interaction.user.id]: "❌",
       [opponent.id]: "⭕",
     };
+    let gameOver = false;
 
     const makeBoard = (highlight = []) => {
       let rows = [];
@@ -55,20 +71,20 @@ module.exports = {
     const embed = new EmbedBuilder()
       .setTitle("🎮 Caro 5x5 (Gomoku)")
       .setDescription(
-        `❌ ${message.author} vs ⭕ ${opponent}\n\nLượt hiện tại: <@${current}>`
+        `❌ ${interaction.user} vs ⭕ ${opponent}\n\nLượt hiện tại: <@${current}>`
       )
       .setColor(client.config.getEmbedConfig().color);
 
-    let gameOver = false;
-    const gameMsg = await message.channel.send({
+    const gameMsg = await interaction.reply({
       embeds: [embed],
       components: makeBoard(),
+      fetchReply: true,
     });
 
     const collector = gameMsg.createMessageComponentCollector({
       time: 120000,
       filter: (i) =>
-        [message.author.id, opponent.id].includes(i.user.id) && !i.user.bot,
+        [interaction.user.id, opponent.id].includes(i.user.id) && !i.user.bot,
     });
 
     function checkWin() {
@@ -104,7 +120,10 @@ module.exports = {
 
     collector.on("collect", async (btn) => {
       if (btn.user.id !== current) {
-        return btn.reply({ content: "⏳ Chưa đến lượt bạn!", flags: 64 });
+        return btn.reply({
+          content: "⏳ Chưa đến lượt bạn!",
+          flags: 64,
+        });
       }
 
       const cell = parseInt(btn.customId.split("_")[1]);
@@ -133,8 +152,8 @@ module.exports = {
         return;
       } else {
         current =
-          current === message.author.id ? opponent.id : message.author.id;
-        desc = `❌ ${message.author} vs ⭕ ${opponent}\n\nLượt hiện tại: <@${current}>`;
+          current === interaction.user.id ? opponent.id : interaction.user.id;
+        desc = `❌ ${interaction.user} vs ⭕ ${opponent}\n\nLượt hiện tại: <@${current}>`;
       }
 
       embed.setDescription(desc);
@@ -166,9 +185,9 @@ module.exports = {
           gameOver = true;
           collector.stop("draw");
         } else {
-          current = message.author.id;
+          current = interaction.user.id;
           embed.setDescription(
-            `❌ ${message.author} vs ⭕ Bot\n\nLượt hiện tại: <@${current}>`
+            `❌ ${interaction.user} vs ⭕ Bot\n\nLượt hiện tại: <@${current}>`
           );
         }
 

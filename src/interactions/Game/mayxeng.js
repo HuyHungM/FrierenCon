@@ -1,4 +1,8 @@
-const { EmbedBuilder } = require("discord.js");
+const {
+  EmbedBuilder,
+  ApplicationCommandType,
+  ApplicationCommandOptionType,
+} = require("discord.js");
 const { commandCategory } = require("../../utils/other.js");
 
 const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "💎"];
@@ -13,30 +17,32 @@ function spin() {
 
 module.exports = {
   name: "slot",
-  aliases: ["slots", "mayxeng"],
   category: commandCategory.GAME,
   description: "Chơi Slot Machine 🎰",
-  usage: "mayxeng <số tiền>",
-  run: async (client, message, args) => {
-    if (!args[0] || isNaN(args[0])) {
-      return message.reply(
-        `❌ Dùng: \`${process.env.BOT_PREFIX}slot <số tiền>\``
-      );
-    }
+  type: ApplicationCommandType.ChatInput,
+  options: [
+    {
+      name: "tiencuoc",
+      description: "Số tiền bạn muốn cược",
+      type: ApplicationCommandOptionType.Integer,
+      required: true,
+      minValue: 1,
+    },
+  ],
+  run: async (client, interaction) => {
+    const bet = interaction.options.getInteger("tiencuoc");
 
-    let bet = parseInt(args[0]);
-    if (bet <= 0) return message.reply("❌ Số tiền phải lớn hơn 0.");
-
-    let bankData = await client.bank.find({ userID: message.author.id });
+    let bankData = await client.bank.find({ userID: interaction.user.id });
     if (!bankData)
-      bankData = await client.bank.create({ userID: message.author.id });
+      bankData = await client.bank.create({ userID: interaction.user.id });
 
     if (bankData.money < bet) {
-      return message.reply(
-        `💸 Bạn không đủ tiền! Số dư hiện tại: **${bankData.money.toLocaleString(
+      return interaction.reply({
+        content: `💸 Bạn không đủ tiền! Số dư hiện tại: **${bankData.money.toLocaleString(
           "vi-VN"
-        )} VNĐ**`
-      );
+        )} VNĐ**`,
+        flags: 64,
+      });
     }
 
     const embed = new EmbedBuilder()
@@ -44,22 +50,24 @@ module.exports = {
       .setColor(client.config.getEmbedConfig().color)
       .setDescription("⏳ Đang quay...");
 
-    let gameMsg = await message.channel.send({ embeds: [embed] });
+    await interaction.reply({ embeds: [embed] });
+    const gameMsg = await interaction.fetchReply();
 
     let slots = ["❔", "❔", "❔"];
-    const updateBoard = (status = "⏳ Đang quay...") =>
+
+    const updateBoard = (text = "⏳ Đang quay...") =>
       embed.setDescription(
-        `| ${slots[0]} | ${slots[1]} | ${slots[2]} |\n\n${status}`
+        `| ${slots[0]} | ${slots[1]} | ${slots[2]} |\n\n${text}`
       );
 
-    // animation quay 7 vòng, mỗi vòng chậm dần
-    let result;
-    for (let round = 0; round < 7; round++) {
+    // animation: quay ngẫu nhiên vài lần
+    for (let round = 0; round < 8; round++) {
       slots = spin();
       await gameMsg.edit({ embeds: [updateBoard()] });
-      await new Promise((res) => setTimeout(res, 500 + round * 200));
-      result = slots;
+      await new Promise((res) => setTimeout(res, 500 + round * 150)); // càng về sau càng chậm
     }
+
+    let result = slots;
 
     let reward = 0;
     let resultText;
@@ -84,7 +92,7 @@ module.exports = {
     }
 
     let newBank = await client.bank.update({
-      userID: message.author.id,
+      userID: interaction.user.id,
       money: reward,
     });
 

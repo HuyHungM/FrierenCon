@@ -45,7 +45,7 @@ module.exports = {
     if (isNaN(betMoney) || betMoney <= 0) {
       return interaction.reply({
         content: `${client.config.emotes.error} Tiền cược phải là số dương.`,
-        ephemeral: true,
+        flags: 64,
       });
     }
 

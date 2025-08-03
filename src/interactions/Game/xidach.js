@@ -96,7 +96,7 @@ module.exports = {
     if (bet <= 0)
       return interaction.reply({
         content: "❌ Số tiền phải lớn hơn 0.",
-        ephemeral: true,
+        flags: 64,
       });
 
     let bankData = await client.bank.find({ userID: interaction.user.id });
@@ -106,7 +106,7 @@ module.exports = {
     if (bankData.money < bet)
       return interaction.reply({
         content: `💸 Bạn không đủ tiền! Số dư hiện tại: **${bankData.money} VNĐ**`,
-        ephemeral: true,
+        flags: 64,
       });
 
     let playerCards = [drawCard(), drawCard()];
