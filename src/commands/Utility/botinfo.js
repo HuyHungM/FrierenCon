@@ -1,7 +1,8 @@
 const { version } = require("../../../package.json");
 const ms = require("ms");
 const { EmbedBuilder, version: discordjsVersion } = require("discord.js");
-const os = require("os-utils");
+const osUtils = require("os-utils");
+const os = require("os");
 const process = require("process");
 const { commandCategory } = require("../../utils/other.js");
 
@@ -12,7 +13,10 @@ module.exports = {
   description: "Kiểm tra trạng thái của `Bot`",
   usage: `botinfo`,
   run: async (client, message, args) => {
-    os.cpuUsage(function (cpuUsage) {
+    osUtils.cpuUsage(function (cpuUsage) {
+      const usedRAM = process.memoryUsage().rss / 1024 / 1024; // MB
+      const totalRAM = os.totalmem() / 1024 / 1024; // MB
+
       const embed = new EmbedBuilder()
         .setColor(client.config.getEmbedConfig().color)
         .setAuthor({
@@ -39,9 +43,7 @@ module.exports = {
           },
           {
             name: "❯ Bộ nhớ:",
-            value: `\`${(process.memoryUsage().rss / 1024 / 1024).toFixed(
-              2
-            )} / 512 MB\``,
+            value: `\`${usedRAM.toFixed(2)} / ${totalRAM.toFixed(2)} MB\``,
             inline: true,
           },
           {
