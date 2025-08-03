@@ -19,20 +19,32 @@ module.exports = (client) => {
     app.use(bodyParser.json());
     app.use(express.urlencoded({ extended: true }));
 
+    // app.use(
+    //   session({
+    //     secret: process.env.SESSION_SECRET,
+    //     resave: true,
+    //     saveUninitialized: true,
+    //     cookie: {
+    //       maxAge: 1000 * 60 * 60 * 24 * 30,
+    //       httpOnly: true,
+    //     },
+    //     store: MongoStore.create({
+    //       mongoUrl: process.env.MONGO_STRING,
+    //       collectionName: "sessions",
+    //       ttl: 60 * 60 * 24,
+    //     }),
+    //   })
+    // );
+
     app.use(
       session({
         secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
         cookie: {
-          maxAge: 1000 * 60 * 60 * 24 * 30,
+          maxAge: 1000 * 60 * 60 * 24 * 30, // 30 ngày
           httpOnly: true,
         },
-        store: MongoStore.create({
-          mongoUrl: process.env.MONGO_STRING,
-          collectionName: "sessions",
-          ttl: 60 * 60 * 24,
-        }),
       })
     );
 
