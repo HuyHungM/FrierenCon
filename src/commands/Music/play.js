@@ -14,7 +14,6 @@ module.exports = {
   description: "Nghe nhạc cùng waifu của bạn",
   usage: `play <tên/link nhạc> (Youtube/Spotify/SoundCloud)`,
   run: async (client, message, args) => {
-    await message.delete();
     const songQuery = args.join(" ");
     if (songQuery.trim() === "") {
       const embed = new EmbedBuilder({

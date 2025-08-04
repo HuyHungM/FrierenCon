@@ -99,7 +99,7 @@ module.exports = (client) => {
       );
     });
 
-    server.listen(process.env.PORT, () =>
+    server.listen(process.env.PORT, "0.0.0.0", () =>
       console.log(
         `🟢 [DASHBOARD]: Dashboard đã được mở tại địa chỉ ${process.env.DOMAIN}`
       )

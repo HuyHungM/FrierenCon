@@ -13,7 +13,6 @@ module.exports = {
   category: commandCategory.MUSIC,
   usage: `playskip <tên/link nhạc> (Youtube/Spotify/SoundCloud)`,
   run: async (client, message, args) => {
-    await message.delete();
     const songQuery = args.join(" ");
     if (songQuery.trim() === "") {
       const embed = new EmbedBuilder({
