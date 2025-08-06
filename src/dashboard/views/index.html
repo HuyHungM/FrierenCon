@@ -30,12 +30,12 @@
     <link rel="stylesheet" href="/css/index.min.css" />
     <link
       rel="shortcut icon"
-      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
-      type="image/png"
+      href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
+      type="image/jpeg"
     />
     <link
       rel="apple-touch-icon"
-      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+      href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
     />
   </head>
   <body onload="loadPage()">
@@ -51,7 +51,7 @@
         <div class="center">
           <a href="/" class="name"
             ><img
-              src="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+              src="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
               class="logo"
             />
             <span

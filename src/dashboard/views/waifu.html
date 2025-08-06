@@ -30,12 +30,12 @@
     <link rel="stylesheet" href="/css/waifu.min.css" />
     <link
     rel="shortcut icon"
-    href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
-    type="image/png"
+    href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
+    type="image/jpeg"
   />
     <link
       rel="apple-touch-icon"
-      href="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+      href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
     />
   </head>
   <body onload="loadPage()" class="dashboard-body">
@@ -50,7 +50,7 @@
         <div class="top">
           <a class="name" href="/">
             <img
-              src="<%= client.user.displayAvatarURL({ extension: 'png' }) %>"
+              src="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
               alt="<%= client.user.username %>"
               class="logo"
             />
@@ -109,7 +109,7 @@
               <li class="sidebar-item active">
                 <a href="/server/<%= guild.id %>/music">
                   <img
-                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.jpg' %>"
                     alt="<%= guild.name %>"
                     class="logo"
                   />
@@ -122,7 +122,7 @@
               <li class="sidebar-item">
                 <a href="/server/<%= guild.id %>/music">
                   <img
-                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.jpg' %>"
                     alt="<%= guild.name %>"
                     class="logo"
                   />
@@ -148,7 +148,7 @@
           <div class="profile">
             <div class="btn">
               <img
-                src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.png' %>"
+                src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.jpg' %>"
                 alt="<%= guild.name %>"
                 class="logo"
               />

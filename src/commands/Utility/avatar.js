@@ -17,7 +17,7 @@ module.exports = {
       if (!member) return message.reply("❌ Không tìm thấy người này.");
 
       const URL = member.user.displayAvatarURL({
-        extension: "png",
+        extension: "jpg",
         dynamic: true,
         size: 1024,
       });

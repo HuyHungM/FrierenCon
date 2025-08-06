@@ -22,7 +22,7 @@ module.exports = {
   run: async (client, interaction) => {
     const user = interaction.options.getUser("user") || interaction.user;
     const URL = user.displayAvatarURL({
-      extension: "png",
+      extension: "jpg",
       dynamic: true,
       size: 1024,
     });
