@@ -1,10 +1,10 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "resume",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Tiếp tục bài hát",
   type: ApplicationCommandType.ChatInput,
   options: [],

@@ -1,9 +1,9 @@
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "chat",
   aliases: ["c"],
-  category: commandCategory.WAIFU,
+  category: CommandCategory.WAIFU,
   description: "Nhắn tin với bot",
   usage: "chat <nội dung tin nhắn>",
   run: async (client, message, args) => {

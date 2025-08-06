@@ -3,11 +3,11 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "taixiu",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi tài xỉu",
   type: ApplicationCommandType.ChatInput,
   options: [

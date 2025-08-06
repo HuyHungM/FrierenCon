@@ -3,7 +3,7 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "💎"];
 
@@ -17,7 +17,7 @@ function spin() {
 
 module.exports = {
   name: "slot",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi Slot Machine 🎰",
   type: ApplicationCommandType.ChatInput,
   options: [

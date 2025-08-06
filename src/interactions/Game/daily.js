@@ -1,10 +1,10 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 const ms = require("ms");
 
 module.exports = {
   name: "daily",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Nhận tiền hàng ngày",
   type: ApplicationCommandType.ChatInput,
   options: [],

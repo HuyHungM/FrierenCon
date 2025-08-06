@@ -5,14 +5,14 @@ const {
   ButtonStyle,
 } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 const dash = "▬";
 const button = "🔘";
 
 module.exports = {
   name: "queue",
   aliases: [],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Xem danh sách bài hát đang phát",
   usage: `queue`,
   run: async (client, message, args) => {

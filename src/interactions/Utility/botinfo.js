@@ -4,12 +4,12 @@ const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const osUtils = require("os-utils");
 const os = require("os");
 const process = require("process");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "botinfo",
   description: "Kiểm tra trạng thái của Bot",
-  category: commandCategory.UTILITY,
+  category: CommandCategory.UTILITY,
   type: ApplicationCommandType.ChatInput,
 
   run: async (client, interaction) => {

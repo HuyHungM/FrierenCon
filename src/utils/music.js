@@ -49,24 +49,24 @@ const noMusicEmbed = new EmbedBuilder({
   description: `${client.config.emotes.error} **Hiện tại không có bài hát nào đang phát!**`,
 }).setColor(client.config.getEmbedConfig().errorColor);
 
-const loopModeEmote = {
+const LoopModeEmote = {
   [RepeatMode.DISABLED]: "⭕",
   [RepeatMode.SONG]: "🔂",
   [RepeatMode.QUEUE]: "🔁",
 };
 
-const loopModeMessage = {
+const LoopModeMessage = {
   [RepeatMode.DISABLED]: "Tắt",
   [RepeatMode.SONG]: "Lặp lại bài hát",
   [RepeatMode.QUEUE]: "Lặp lại hàng đợi",
 };
 
-const autoplayModeMessage = {
+const AutoplayModeMessage = {
   [false]: "Tắt",
   [true]: "Bật",
 };
 
-const filterSubCommand = {
+const FilterSubCommand = {
   ADD: "add",
   REMOVE: "remove",
   CLEAR: "clear",
@@ -74,7 +74,7 @@ const filterSubCommand = {
   LIST: "list",
 };
 
-const volumeIcon = {
+const VolumeIcon = {
   low: "🔈",
   medium: "🔉",
   high: "🔊",
@@ -83,9 +83,9 @@ const volumeIcon = {
 module.exports = {
   checkSameRoom,
   noMusicEmbed,
-  filterSubCommand,
-  loopModeEmote,
-  loopModeMessage,
-  autoplayModeMessage,
-  volumeIcon,
+  FilterSubCommand,
+  LoopModeEmote,
+  LoopModeMessage,
+  AutoplayModeMessage,
+  VolumeIcon,
 };

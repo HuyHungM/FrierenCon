@@ -3,7 +3,7 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const suits = ["♠️", "♥️", "♦️", "♣️"];
 const ranks = [
@@ -42,7 +42,7 @@ function calcPoint(cards) {
 module.exports = {
   name: "baicao",
   description: "Chơi bài cào (3 cây) với bot",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   type: ApplicationCommandType.ChatInput,
   options: [
     {

@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const suits = ["♠️", "♥️", "♦️", "♣️"];
 const ranks = [
@@ -38,7 +38,7 @@ function calcPoint(cards) {
 module.exports = {
   name: "baicao",
   aliases: ["bcao", "3cay"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi bài cào (3 cây) với bot",
   usage: "baicao <số tiền>",
   run: async (client, message, args) => {

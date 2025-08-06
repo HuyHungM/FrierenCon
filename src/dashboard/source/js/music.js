@@ -1,12 +1,12 @@
 const socket = io();
 
-const loopModeMessage = {
+const LoopModeMessage = {
   [RepeatMode.DISABLED]: "Tắt",
   [RepeatMode.SONG]: "Bài hát",
   [RepeatMode.QUEUE]: "Hàng đợi",
 };
 
-const autoplayModeMessage = {
+const AutoplayModeMessage = {
   [false]: "Tắt",
   [true]: "Bật",
 };
@@ -19,9 +19,9 @@ $(document).ready(function () {
   socket.on(`getMusicData-${userId}`, function (queue) {
     $(".player-info .songs .middle h1").text(queue.songs.length);
     $(".player-info .autoplay .middle h1").text(
-      autoplayModeMessage[queue.autoplay]
+      AutoplayModeMessage[queue.autoplay]
     );
-    $(".player-info .loop .middle h1").text(loopModeMessage[queue.repeatMode]);
+    $(".player-info .loop .middle h1").text(LoopModeMessage[queue.repeatMode]);
     $(".player-info .volume .middle h1").text(`${queue.volume}%`);
 
     if (queue.songs.length > 0) {

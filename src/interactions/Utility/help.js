@@ -5,11 +5,11 @@ const {
 } = require("discord.js");
 const { stripIndent } = require("common-tags");
 const packageJson = require("../../../package.json");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "help",
-  category: commandCategory.UTILITY,
+  category: CommandCategory.UTILITY,
   description: "Hướng dẫn dùng lệnh!",
   type: ApplicationCommandType.ChatInput,
   options: [

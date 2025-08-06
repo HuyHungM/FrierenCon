@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "previous",
   aliases: ["prev", "previous-song", "prev-song"],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Phát bài hát trước đó",
   usage: `previous`,
   run: async (client, message, args) => {

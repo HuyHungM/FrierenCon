@@ -13,6 +13,7 @@ module.exports = (client) => {
     leaveOnEmpty: false,
     leaveOnStop: true,
     emitNewSongOnly: false,
+    savePreviousSongs: true,
     emitAddSongWhenCreatingQueue: false,
     emitAddListWhenCreatingQueue: true,
     plugins: [

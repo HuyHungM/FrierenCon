@@ -4,7 +4,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const tiles = [
   "🏁 Start",
@@ -45,7 +45,7 @@ function rollDice() {
 module.exports = {
   name: "cotyphu",
   aliases: ["monopoly", "typhu"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Cờ Tỷ Phú mini",
   usage: "cotyphu <số tiền cược>",
   run: async (client, message, args) => {

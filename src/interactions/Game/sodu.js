@@ -1,9 +1,9 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "sodu",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Kiểm tra số dư",
   type: ApplicationCommandType.ChatInput,
   options: [],

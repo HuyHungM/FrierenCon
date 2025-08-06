@@ -5,11 +5,11 @@ const {
 } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
 const ms = require("ms");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "seek",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Tua thời lượng bài hát",
   type: ApplicationCommandType.ChatInput,
   options: [

@@ -5,15 +5,15 @@ const {
 } = require("discord.js");
 const {
   noMusicEmbed,
-  loopModeEmote,
-  loopModeMessage,
+  LoopModeEmote,
+  LoopModeMessage,
 } = require("../../utils/music");
 const { RepeatMode } = require("distube");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "loop",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Chỉnh chế độ lặp",
   type: ApplicationCommandType.ChatInput,
   options: [
@@ -56,7 +56,7 @@ module.exports = {
       mode = await queue.setRepeatMode(mode);
 
       const embed = new EmbedBuilder({
-        description: `${loopModeEmote[mode]} **Đã chỉnh chế độ lặp lại thành** \`${loopModeMessage[mode]}\`**!**`,
+        description: `${LoopModeEmote[mode]} **Đã chỉnh chế độ lặp lại thành** \`${LoopModeMessage[mode]}\`**!**`,
       }).setColor(client.config.getEmbedConfig().color);
 
       interaction.reply({ embeds: [embed], flags: 64 });

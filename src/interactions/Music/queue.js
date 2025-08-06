@@ -6,13 +6,13 @@ const {
   ApplicationCommandType,
 } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 const dash = "▬";
 const button = "🔘";
 
 module.exports = {
   name: "queue",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Xem danh sách bài hát đang phát",
   type: ApplicationCommandType.ChatInput,
   options: [],

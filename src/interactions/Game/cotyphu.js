@@ -5,7 +5,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const tiles = [
   "🏁 Start",
@@ -45,7 +45,7 @@ function rollDice() {
 
 module.exports = {
   name: "cotyphu",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi Cờ Tỷ Phú mini",
   type: ApplicationCommandType.ChatInput,
   options: [

@@ -5,11 +5,11 @@ const {
   ButtonStyle,
   EmbedBuilder,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "caro",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi Caro 5x5 (gomoku)",
   type: ApplicationCommandType.ChatInput,
   options: [

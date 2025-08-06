@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const symbols = ["🍒", "🍋", "🍇", "🍉", "⭐", "💎"];
 
@@ -14,7 +14,7 @@ function spin() {
 module.exports = {
   name: "slot",
   aliases: ["slots", "mayxeng"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi Slot Machine 🎰",
   usage: "mayxeng <số tiền>",
   run: async (client, message, args) => {

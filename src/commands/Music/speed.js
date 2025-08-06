@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "speed",
   aliases: [],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Điều chỉnh tốc độ phát",
   usage: `speed <0.5-10>`,
   run: async (client, message, args) => {

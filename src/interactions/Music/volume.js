@@ -5,11 +5,11 @@ const {
 } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
 const volume = require("../../commands/Music/volume");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "volume",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Chỉnh âm lượng",
   type: ApplicationCommandType.ChatInput,
   options: [

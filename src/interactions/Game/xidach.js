@@ -6,7 +6,7 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const suits = ["♠️", "♥️", "♦️", "♣️"];
 const ranks = [
@@ -80,7 +80,7 @@ function formatSpecial(type, point) {
 module.exports = {
   name: "xidach",
   description: "Chơi Xì Dách (Blackjack) với bot",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   type: ApplicationCommandType.ChatInput,
   options: [
     {

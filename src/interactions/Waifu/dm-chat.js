@@ -1,9 +1,9 @@
 const { ApplicationCommandType } = require("discord.js");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "dm-chat",
-  category: commandCategory.WAIFU,
+  category: CommandCategory.WAIFU,
   description: "Nhắn riêng với bot",
   type: ApplicationCommandType.ChatInput,
   options: [],

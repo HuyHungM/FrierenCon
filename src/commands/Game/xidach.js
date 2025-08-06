@@ -4,7 +4,7 @@ const {
   ButtonStyle,
   EmbedBuilder,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const suits = ["♠️", "♥️", "♦️", "♣️"];
 const ranks = [
@@ -78,7 +78,7 @@ function formatSpecial(type, point) {
 module.exports = {
   name: "xidach",
   aliases: ["blackjack", "xd"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi Xì Dách với bot",
   usage: "xidach <số tiền>",
   run: async (client, message, args) => {

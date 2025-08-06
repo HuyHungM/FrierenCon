@@ -3,14 +3,14 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 const choices = ["bầu", "cua", "tôm", "cá", "nai", "gà"];
 
 module.exports = {
   name: "baucua",
   description: "Chơi bầu cua",
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   type: ApplicationCommandType.ChatInput,
   options: [
     {

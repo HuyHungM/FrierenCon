@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 const { stripIndent } = require("common-tags");
 const packageJson = require("../../../package.json");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "help",
-  category: commandCategory.UTILITY,
+  category: CommandCategory.UTILITY,
   aliases: [],
   description: "Hướng dẫn dùng lệnh!",
   usage: `help [tên lệnh]`,

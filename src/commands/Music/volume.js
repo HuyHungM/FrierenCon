@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "volume",
   aliases: ["vol"],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Chỉnh âm lượng",
   usage: `volume <âm lượng>`,
   run: async (client, message, args) => {

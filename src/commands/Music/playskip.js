@@ -4,13 +4,13 @@ const {
   ActionRowBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 const { SearchResultType } = require("distube");
 
 module.exports = {
   name: "playskip",
   aliases: ["pskip"],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   usage: `playskip <tên/link nhạc> (Youtube/Spotify/SoundCloud)`,
   run: async (client, message, args) => {
     const songQuery = args.join(" ");

@@ -4,11 +4,11 @@ const {
   ApplicationCommandOptionType,
 } = require("discord.js");
 const { noMusicEmbed } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "skipto",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Bỏ qua bài hát đến một vị trí nhất định",
   type: ApplicationCommandType.ChatInput,
   options: [

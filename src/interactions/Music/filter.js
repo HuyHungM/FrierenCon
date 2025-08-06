@@ -3,12 +3,12 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { noMusicEmbed, filterSubCommand } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { noMusicEmbed, FilterSubCommand } = require("../../utils/music");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "filter",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Thêm filter cho bài hát",
   type: ApplicationCommandType.ChatInput,
   options: [
@@ -63,7 +63,7 @@ module.exports = {
 
     try {
       switch (subCommand.name) {
-        case filterSubCommand.ADD:
+        case FilterSubCommand.ADD:
           if (Object.keys(client.distube.filters).includes(filter)) {
             if (!queue.filters.has(filter)) await queue.filters.add(filter);
 
@@ -84,7 +84,7 @@ module.exports = {
           }
           break;
 
-        case filterSubCommand.REMOVE:
+        case FilterSubCommand.REMOVE:
           if (Object.keys(client.distube.filters).includes(filter)) {
             if (queue.filters.has(filter)) await queue.filters.remove(filter);
 
@@ -109,7 +109,7 @@ module.exports = {
           }
           break;
 
-        case filterSubCommand.CLEAR:
+        case FilterSubCommand.CLEAR:
           await queue.filters.clear();
           const clearEmbed = new EmbedBuilder({
             description: `${client.config.emotes.success} **Đã tắt filter!**`,
@@ -117,7 +117,7 @@ module.exports = {
           interaction.reply({ embeds: [clearEmbed], flags: 64 });
           break;
 
-        case filterSubCommand.ACTIVES:
+        case FilterSubCommand.ACTIVES:
           const activesEmbed = new EmbedBuilder({
             description: `${
               queue.filters.size > 0
@@ -130,7 +130,7 @@ module.exports = {
           interaction.reply({ embeds: [activesEmbed], flags: 64 });
           break;
 
-        case filterSubCommand.LIST:
+        case FilterSubCommand.LIST:
           const listEmbed = new EmbedBuilder({
             description: `${client.config.emotes.success} **Các loại filter:** 
           \n\`${Object.keys(client.distube.filters).join(" | ")}\``,

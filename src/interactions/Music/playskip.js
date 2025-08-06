@@ -7,11 +7,11 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "playskip",
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Nghe nhạc cùng waifu của bạn!",
   type: ApplicationCommandType.ChatInput,
   options: [

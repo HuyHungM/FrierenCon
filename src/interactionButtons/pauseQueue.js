@@ -6,10 +6,10 @@ const {
 } = require("discord.js");
 const {
   noMusicEmbed,
-  volumeIcon,
-  loopModeMessage,
-  autoplayModeMessage,
-  loopModeEmote,
+  VolumeIcon,
+  LoopModeMessage,
+  AutoplayModeMessage,
+  LoopModeEmote,
 } = require("../utils/music");
 
 module.exports = {
@@ -39,22 +39,22 @@ module.exports = {
           {
             name: `${
               queue.volume <= 35
-                ? volumeIcon.low
+                ? VolumeIcon.low
                 : queue.volume <= 70
-                ? volumeIcon.medium
-                : volumeIcon.high
+                ? VolumeIcon.medium
+                : VolumeIcon.high
             } Âm lượng: `,
             value: `\`${queue.volume}%\``,
             inline: true,
           },
           {
             name: "Chế độ lặp lại: ",
-            value: `\`${loopModeMessage[queue.repeatMode]}\``,
+            value: `\`${LoopModeMessage[queue.repeatMode]}\``,
             inline: true,
           },
           {
             name: "Tự động phát: ",
-            value: `\`${autoplayModeMessage[queue.autoplay]}\``,
+            value: `\`${AutoplayModeMessage[queue.autoplay]}\``,
             inline: true,
           },
           {
@@ -103,7 +103,7 @@ module.exports = {
         }),
         new ButtonBuilder({
           custom_id: `loop ${queue.id}`,
-          emoji: `${loopModeEmote[queue.repeatMode]}`,
+          emoji: `${LoopModeEmote[queue.repeatMode]}`,
           style: ButtonStyle.Primary,
         }),
       ];

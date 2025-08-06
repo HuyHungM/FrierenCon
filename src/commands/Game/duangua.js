@@ -1,10 +1,10 @@
 const { EmbedBuilder } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "duangua",
   aliases: ["race", "horse"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Đua ngựa kịch tính có cược",
   usage: "duangua <con số (1-4)> <số tiền>",
   run: async (client, message, args) => {

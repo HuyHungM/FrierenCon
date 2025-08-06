@@ -3,12 +3,12 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "avatar",
   description: "Xem avatar của bạn hoặc người khác",
-  category: commandCategory.UTILITY,
+  category: CommandCategory.UTILITY,
   type: ApplicationCommandType.ChatInput,
   options: [
     {

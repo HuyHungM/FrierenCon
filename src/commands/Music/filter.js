@@ -1,11 +1,11 @@
 const { EmbedBuilder } = require("discord.js");
-const { noMusicEmbed, filterSubCommand } = require("../../utils/music");
-const { commandCategory } = require("../../utils/other");
+const { noMusicEmbed, FilterSubCommand } = require("../../utils/music");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "filter",
   aliases: [],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Thêm filter cho bài hát",
   usage: `filter <add/remove/clear/actives/list> [tên filter]`,
   run: async (client, message, args) => {
@@ -18,7 +18,7 @@ module.exports = {
     try {
       if (
         !subCommand ||
-        !Object.values(filterSubCommand).includes(subCommand)
+        !Object.values(FilterSubCommand).includes(subCommand)
       ) {
         const embed = new EmbedBuilder({
           description: `${client.config.emotes.error} **Lệnh không hợp lệ!**
@@ -28,7 +28,7 @@ module.exports = {
       }
 
       switch (subCommand) {
-        case filterSubCommand.ADD:
+        case FilterSubCommand.ADD:
           if (Object.keys(client.distube.filters).includes(filter)) {
             if (!queue.filters.has(filter)) await queue.filters.add(filter);
 
@@ -49,7 +49,7 @@ module.exports = {
           }
           break;
 
-        case filterSubCommand.REMOVE:
+        case FilterSubCommand.REMOVE:
           if (Object.keys(client.distube.filters).includes(filter)) {
             if (queue.filters.has(filter)) await queue.filters.remove(filter);
 
@@ -74,7 +74,7 @@ module.exports = {
           }
           break;
 
-        case filterSubCommand.CLEAR:
+        case FilterSubCommand.CLEAR:
           await queue.filters.clear();
           const clearEmbed = new EmbedBuilder({
             description: `${client.config.emotes.success} **Đã tắt filter!**`,
@@ -82,7 +82,7 @@ module.exports = {
           message.channel.send({ embeds: [clearEmbed] });
           break;
 
-        case filterSubCommand.ACTIVES:
+        case FilterSubCommand.ACTIVES:
           const activesEmbed = new EmbedBuilder({
             description: `${
               queue.filters.size > 0
@@ -95,7 +95,7 @@ module.exports = {
           message.channel.send({ embeds: [activesEmbed] });
           break;
 
-        case filterSubCommand.LIST:
+        case FilterSubCommand.LIST:
           const listEmbed = new EmbedBuilder({
             description: `${client.config.emotes.success} **Các loại filter:** 
           \n\`${Object.keys(client.distube.filters).join(" | ")}\``,

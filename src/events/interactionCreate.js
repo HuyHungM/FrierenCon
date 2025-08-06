@@ -1,5 +1,5 @@
 const { Events } = require("discord.js");
-const { commandCategory } = require("../utils/other");
+const { CommandCategory } = require("../utils/other");
 const { checkSameRoom } = require("../utils/music");
 
 module.exports = (client) => {
@@ -14,7 +14,7 @@ module.exports = (client) => {
     const { commandName } = interaction;
     const command = client.interactions.get(commandName);
     if (command) {
-      if (command.category === commandCategory.MUSIC) {
+      if (command.category === CommandCategory.MUSIC) {
         if (
           checkSameRoom({
             message: null,

@@ -4,12 +4,12 @@ const {
   ButtonStyle,
   EmbedBuilder,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "caro",
   aliases: ["gomoku", "tic5"],
-  category: commandCategory.GAME,
+  category: CommandCategory.GAME,
   description: "Chơi caro 5x5 (gomoku)",
   usage: "caro [@người chơi]",
   run: async (client, message, args) => {

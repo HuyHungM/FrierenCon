@@ -5,12 +5,12 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { commandCategory } = require("../../utils/other");
+const { CommandCategory } = require("../../utils/other");
 
 module.exports = {
   name: "play",
   aliases: ["p"],
-  category: commandCategory.MUSIC,
+  category: CommandCategory.MUSIC,
   description: "Nghe nhạc cùng waifu của bạn",
   usage: `play <tên/link nhạc> (Youtube/Spotify/SoundCloud)`,
   run: async (client, message, args) => {

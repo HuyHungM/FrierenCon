@@ -1,10 +1,10 @@
 const { EmbedBuilder } = require("discord.js");
-const { commandCategory } = require("../../utils/other.js");
+const { CommandCategory } = require("../../utils/other.js");
 
 module.exports = {
   name: "ping",
   aliases: [],
-  category: commandCategory.UTILITY,
+  category: CommandCategory.UTILITY,
   description: "Ping của bot",
   usage: "ping",
   run: (client, message, args) => {
