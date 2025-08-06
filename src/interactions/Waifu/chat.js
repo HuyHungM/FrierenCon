@@ -40,14 +40,14 @@ module.exports = {
     if (!waifuData?.isReplied) return;
 
     try {
-      interaction.reply({ content: "`Đang soạn...`", flags: 64 });
+      await interaction.deferReply();
       waifuData.messages.push({ role: "user", content: message.value });
       const res = await client.waifuai.createMessage({
         messages: waifuData.messages,
         waifuName: waifuData.name,
         model: model,
         ownerID: interaction.user.id,
-        ownerName: interaction.author.username,
+        ownerName: interaction.user.username,
       });
 
       if (!res) return;
