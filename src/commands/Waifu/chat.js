@@ -1,4 +1,3 @@
-const { model } = require("../../config/AIConfig");
 const { commandCategory } = require("../../utils/other");
 
 module.exports = {
@@ -23,18 +22,14 @@ module.exports = {
 
     try {
       message.channel.sendTyping();
-
-      waifuData.messages.push({ role: "user", content: args.join(" ") });
       const res = await client.waifuai.createMessage({
         messages: waifuData.messages,
-        waifuName: waifuData.name,
-        model: model,
+        userMessage: args.join(" "),
         ownerID: message.author.id,
-        ownerName: message.author.username,
       });
       if (!res) return;
 
-      message.reply(res.choices[0].message.content);
+      message.reply(res);
     } catch (error) {
       console.error(error);
       message.channel.send("Đã xảy ra lỗi!");

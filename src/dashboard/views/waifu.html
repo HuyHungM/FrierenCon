@@ -7,36 +7,23 @@
     <title>Waifu - <%= waifu ? waifu.name : "Chưa tồn tại" %></title>
     <link rel="manifest" href="/api/get/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta
-      name="apple-mobile-web-app-status-bar-style"
-      content="black-translucent"
-    />
-    <meta
-      name="apple-mobile-web-app-title"
-      content="<%= client.user.username %>"
-    />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="<%= client.user.username %>" />
+
     <!-- MATERIAL ICON -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
     <!-- STYLESHEET -->
     <link rel="stylesheet" href="/css/animation.min.css" />
     <link rel="stylesheet" href="/css/global.min.css" />
     <link rel="stylesheet" href="/css/waifu.min.css" />
-    <link
-    rel="shortcut icon"
-    href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
-    type="image/jpeg"
-  />
-    <link
-      rel="apple-touch-icon"
-      href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
-    />
+
+    <link rel="shortcut icon"
+          href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
+          type="image/jpeg" />
+    <link rel="apple-touch-icon"
+          href="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>" />
   </head>
   <body onload="loadPage()" class="dashboard-body">
     <div id="loader">
@@ -46,86 +33,62 @@
     </div>
 
     <div id="container">
+      <!-- SIDEBAR -->
       <aside id="sidebar">
         <div class="top">
           <a class="name" href="/">
-            <img
-              src="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
-              alt="<%= client.user.username %>"
-              class="logo"
-            />
-            <span
-              class="shining-text"
-              style="--color-text-shadow: var(--color-success)"
-              ><%= client.user.username %>
+            <img src="<%= client.user.displayAvatarURL({ extension: 'jpg' }) %>"
+                 alt="<%= client.user.username %>" class="logo" />
+            <span class="shining-text" style="--color-text-shadow: var(--color-success)">
+              <%= client.user.username %>
             </span>
           </a>
         </div>
         <div class="sidebar-sections">
           <div class="sidebar-section">
-            <div class="title">
-              <h2>Bảng điều khiển</h2>
-            </div>
+            <div class="title"><h2>Bảng điều khiển</h2></div>
             <ul class="sidebar-items">
               <li class="sidebar-item">
                 <a href="/server/<%= guild.id %>">
-                  <i class="fa-solid fa-eye"></i>
-                  <span>Tổng quan</span>
+                  <i class="fa-solid fa-eye"></i><span>Tổng quan</span>
                   <i class="fa-solid fa-chevron-right expand-icon"></i>
                 </a>
               </li>
               <li class="sidebar-item active">
                 <a href="/server/<%= guild.id %>/waifu">
-                  <i class="fa-solid fa-robot"></i>
-                  <span>Waifu</span>
+                  <i class="fa-solid fa-robot"></i><span>Waifu</span>
                   <i class="fa-solid fa-chevron-right expand-icon"></i>
                 </a>
               </li>
               <li class="sidebar-item expand" style="--item-count: 3">
                 <div class="sidebar-expand-btn">
-                  <i class="fa-solid fa-music"></i>
-                  <span>Âm nhạc</span>
+                  <i class="fa-solid fa-music"></i><span>Âm nhạc</span>
                   <i class="fa-solid fa-chevron-right expand-icon"></i>
                 </div>
                 <ul class="sidebar-expand">
-                  <li class="expand-item">
-                    <a href="/server/<%= guild.id %>/music">Thông tin</a>
-                  </li>
-                  <li class="expand-item">
-                    <a href="/server/<%= guild.id %>/music/search">Tìm kiếm</a>
-                  </li>
-                  <li class="expand-item">
-                    <a href="/server/<%= guild.id %>/music/queue">Hàng chờ</a>
-                  </li>
+                  <li class="expand-item"><a href="/server/<%= guild.id %>/music">Thông tin</a></li>
+                  <li class="expand-item"><a href="/server/<%= guild.id %>/music/search">Tìm kiếm</a></li>
+                  <li class="expand-item"><a href="/server/<%= guild.id %>/music/queue">Hàng chờ</a></li>
                 </ul>
               </li>
             </ul>
           </div>
           <div class="sidebar-section">
-            <div class="title">
-              <h2>Máy chủ</h2>
-            </div>
+            <div class="title"><h2>Máy chủ</h2></div>
             <ul class="sidebar-items">
               <li class="sidebar-item active">
                 <a href="/server/<%= guild.id %>/music">
-                  <img
-                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
-                    alt="<%= guild.name %>"
-                    class="logo"
-                  />
+                  <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                       alt="<%= guild.name %>" class="logo" />
                   <span><%= guild.name %></span>
                   <i class="fa-solid fa-chevron-right expand-icon"></i>
                 </a>
               </li>
-              <% user.guilds.filter((x) => (x.id !== guild.id)).map((guild) => {
-              %>
+              <% user.guilds.filter((x) => (x.id !== guild.id)).map((guild) => { %>
               <li class="sidebar-item">
                 <a href="/server/<%= guild.id %>/music">
-                  <img
-                    src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
-                    alt="<%= guild.name %>"
-                    class="logo"
-                  />
+                  <img src="<%= guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : '/assets/images/default_guild_icon.png' %>"
+                       alt="<%= guild.name %>" class="logo" />
                   <span><%= guild.name %></span>
                   <i class="fa-solid fa-chevron-right expand-icon"></i>
                 </a>
@@ -135,37 +98,26 @@
           </div>
         </div>
         <div id="close-sidebar-btn">
-          <i class="fa-solid fa-reply-all"></i>
-          Close
+          <i class="fa-solid fa-reply-all"></i> Close
         </div>
       </aside>
 
+      <!-- MAIN -->
       <main id="main">
         <header id="header">
-          <div id="menu-btn" class="btn">
-            <i class="fa-solid fa-bars"></i>
-          </div>
+          <div id="menu-btn" class="btn"><i class="fa-solid fa-bars"></i></div>
           <div class="profile">
             <div class="btn">
-              <img
-                src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.jpg' %>"
-                alt="<%= guild.name %>"
-                class="logo"
-              />
+              <img src="<%= user.avatar ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` : '/assets/images/logo.jpg' %>"
+                   alt="<%= guild.name %>" class="logo" />
               <span><%= user.username %></span>
             </div>
             <ul class="expand">
               <li>
-                <a href="/servers">
-                  <i class="fa-solid fa-server"></i>
-                  <span>Danh sách m.chủ</span>
-                </a>
+                <a href="/servers"><i class="fa-solid fa-server"></i><span>Danh sách m.chủ</span></a>
               </li>
               <li>
-                <a href="/logout">
-                  <i class="fa-solid fa-right-from-bracket"></i>
-                  <span>Đăng xuất</span>
-                </a>
+                <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i><span>Đăng xuất</span></a>
               </li>
             </ul>
           </div>
@@ -176,44 +128,41 @@
             <div class="message-list">
               <% if (waifu) { %>
               <div class="message-container notification">
-                <small class="text-muted"
-                  >Bạn đã được kết nối với <%= waifu.name %> trên <%= client.user.username
-                  %></small
-                >
+                <small class="text-muted">Bạn đã được kết nối với <%= waifu.name %> trên <%= client.user.username %></small>
               </div>
-              <% waifu.messages.map((message) => { %> <% if (message.role ===
-              "assistant") { %>
-              <div class="message-container waifu">
-                <div class="message">
-                  <%= message.content.replace(/:heart:/g, '♥') %>
-                </div>
-              </div>
+              <% waifu.messages.map((message) => { %>
+                <% if (message.role === "model") { %>
+                  <div class="message-container waifu">
+                    <div class="message">
+                      <%= (message.parts?.[0]?.text || message.content || "").replace(/:heart:/g, '♥') %>
+                    </div>
+                  </div>
+                <% } else { %>
+                  <div class="message-container user">
+                    <div class="message">
+                      <%= (message.parts?.[0]?.text || message.content || "").replace(/:heart:/g, '♥') %>
+                    </div>
+                  </div>
+                <% } %>
+              <% }) %>
               <% } else { %>
-              <div class="message-container user">
-                <div class="message">
-                  <%= message.content.replace(/:heart:/g, '♥') %>
-                </div>
-              </div>
-              <% } %> <% }) %> <% } else { %>
               <div class="message-container notification">
-                <small class="text-muted"
-                  >Waifu chưa tồn tại. Vui lòng sử dụng /waifu-create trên
-                  discord để khởi tạo waifu cho riêng mình.</small
-                >
+                <small class="text-muted">Waifu chưa tồn tại. Vui lòng sử dụng /waifu-create trên Discord để khởi tạo waifu cho riêng mình.</small>
               </div>
               <% } %>
+              <div id="typing-indicator" style="display:none" class="message-container waifu">
+                <div class="message">Đang gõ... ✨</div>
+              </div>
             </div>
+
             <form id="message-form">
-              <textarea
-                type="text"
-                id="message-input"
-                class="<%= !waifu ? 'readonly' : '' %>"
-                autocomplete="off"
-                placeholder="Nhập tin nhắn"
-                rows="1"
-                dir="auto"
-                <%= !waifu ? "readonly" : "" %>
-              ></textarea>
+              <textarea id="message-input"
+                        class="<%= !waifu ? 'readonly' : '' %>"
+                        autocomplete="off"
+                        placeholder="Nhập tin nhắn"
+                        rows="1"
+                        dir="auto"
+                        <%= !waifu ? "readonly" : "" %>></textarea>
               <button id="send-message-btn" type="submit" class="<%= !waifu ? 'readonly' : '' %>">
                 <i class="fa-solid fa-paper-plane"></i>
               </button>
@@ -228,13 +177,31 @@
     <script src="https://cdn.jsdelivr.net/npm/socket.io@4.7.5/client-dist/socket.io.min.js"></script>
     <script>
       const userId = "<%= user.id %>";
-      const userName = "<%= user.username %>"
-      let isWaifu;
-      if ("<%= waifu?.messages[0]?.content %>" !== "") {
-        isWaifu = true
-      } else {
-        isWaifu = false
+      const userName = "<%= user.username %>";
+      const isWaifu = <%= waifu && waifu.messages && waifu.messages.length > 0 ? "true" : "false" %>;
+
+      function scrollToBottom() {
+        const msgList = document.querySelector('.message-list');
+        msgList.scrollTop = msgList.scrollHeight;
       }
+
+      function showTyping() {
+        document.getElementById('typing-indicator').style.display = 'block';
+        scrollToBottom();
+      }
+
+      function hideTyping() {
+        document.getElementById('typing-indicator').style.display = 'none';
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const textarea = document.getElementById('message-input');
+        textarea.addEventListener('input', () => {
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight + "px";
+        });
+        scrollToBottom();
+      });
     </script>
     <script src="/js/global.min.js"></script>
     <script src="/js/waifu.min.js"></script>

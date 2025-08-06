@@ -1,24 +1,23 @@
 const waifu = require("../models/waifu");
-const OpenAI = require("openai");
+const aiconfig = require("../config/AIConfig");
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 class WaifuAI {
-  constructor({ baseURL, apiKey }) {
-    this.baseURL = baseURL + "/v1/chat/completions";
+  constructor({ apiKey }) {
     this.apiKey = apiKey;
 
-    const openai = new OpenAI({
-      apiKey: process.env.AI_API_KEY,
-      baseURL: process.env.BASE_AI_URL,
-    });
+    if (!this.apiKey) {
+      throw new Error("Thiếu AI_API_KEY trong env!");
+    }
 
-    this.openai = openai;
+    this.genAI = new GoogleGenerativeAI(this.apiKey);
   }
 
   async create({ name, ownerID, messages }) {
     const newWaifu = waifu({
-      name: name,
-      ownerID: ownerID,
-      messages: messages,
+      name,
+      ownerID,
+      messages,
       isReplied: true,
     });
 
@@ -26,66 +25,64 @@ class WaifuAI {
       await newWaifu.save();
       return newWaifu;
     } catch (error) {
+      console.error("Lỗi khi tạo waifu:", error);
       return null;
     }
   }
 
   async delete({ ownerID }) {
-    const filter = { ownerID: ownerID };
+    const filter = { ownerID };
 
     const waifuData = await waifu.deleteOne(filter);
-
-    if (waifuData.deletedCount == 1) {
-      return waifuData.deletedCount;
-    } else return null;
+    return waifuData.deletedCount === 1 ? waifuData.deletedCount : null;
   }
 
   async find({ ownerID }) {
-    const filter = { ownerID: ownerID };
+    const filter = { ownerID };
 
     const waifuData = await waifu.findOne(filter);
-
-    if (waifuData) {
-      return waifuData;
-    } else {
-      return null;
-    }
+    return waifuData || null;
   }
 
-  async createMessage({ messages, waifuName, model, ownerID, ownerName }) {
-    const filter = { ownerID: ownerID };
-
-    const options = {
-      upsert: true,
-      new: true,
-    };
+  async createMessage({ messages, userMessage, ownerID }) {
+    const filter = { ownerID };
+    const options = { upsert: true, new: true };
 
     try {
+      // đánh dấu chưa rep
       await waifu.findOneAndUpdate(filter, { isReplied: false }, options);
 
-      const res = await this.openai.chat.completions.create({
-        messages: messages,
-        model: model,
+      const model = this.genAI.getGenerativeModel({
+        model: aiconfig.model,
       });
 
-      if (res?.choices[0]?.message?.content?.toLowerCase().includes("error")) {
-        console.error(
-          "🔴 [AntiCrash]: AI Error: ",
-          res?.choices[0]?.message?.content
-        );
+      const chat = model.startChat({
+        history: messages,
+        generationConfig: {
+          maxOutputTokens: 65536,
+          temperature: 1.1,
+          topP: 0.9,
+          topK: 40,
+        },
+        systemInstruction: aiconfig.getStarterMessage().systemInstruction,
+      });
+
+      if (!userMessage.trim()) {
+        throw new Error("Không có userMessage hợp lệ để gửi!");
+      }
+
+      const res = await chat.sendMessage(userMessage);
+
+      const reply =
+        res?.response?.candidates?.[0]?.content?.parts?.[0]?.text ||
+        res?.response?.text ||
+        "";
+
+      if (!reply.trim()) {
+        console.error("🔴 [AntiCrash]: Gemini không trả lời");
         await waifu.findOneAndUpdate(filter, { isReplied: true }, options);
         return null;
       }
-
-      messages.push({
-        role: "assistant",
-        content: res.choices[0].message.content,
-      });
-
-      messages.push({
-        role: "system",
-        content: `Bạn tên là ${waifuName}, là người bạn gái đáng yêu của ${ownerName}`,
-      });
 
       await waifu.findOneAndUpdate(
         filter,
@@ -93,10 +90,10 @@ class WaifuAI {
         options
       );
 
-      return res;
+      return reply;
     } catch (error) {
       await waifu.findOneAndUpdate(filter, { isReplied: true }, options);
-      console.error(error);
+      console.error("Gemini Chat Error:", error);
       throw error;
     }
   }

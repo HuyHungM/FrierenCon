@@ -21,7 +21,7 @@ module.exports = {
       await client.waifuai.create({
         name: args.join(" "),
         ownerID: message.author.id,
-        messages: AIConfig.getStarterMessage(message, args),
+        messages: AIConfig.getStarterMessage(message, args).history,
       });
 
       message.reply(

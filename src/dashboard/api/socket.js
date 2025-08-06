@@ -153,29 +153,23 @@ module.exports = (client, io) => {
       socket.emit(`getWaifuData-${userId}`, waifu);
     });
 
-    socket.on(
-      "sendWaifuMessage",
-      async function ({ userId, userName, message }) {
-        const waifuData = await client.waifuai.find({ ownerID: userId });
-        if (!waifuData) return;
-        if (!waifuData.isReplied) return;
+    socket.on("sendWaifuMessage", async function ({ userId, message }) {
+      const waifuData = await client.waifuai.find({ ownerID: userId });
+      if (!waifuData) return;
+      if (!waifuData.isReplied) return;
 
-        try {
-          waifuData.messages.push({ role: "user", content: message });
-          const res = await client.waifuai.createMessage({
-            messages: waifuData.messages,
-            waifuName: waifuData.name,
-            model: model,
-            ownerID: userId,
-            ownerName: userName,
-          });
+      try {
+        const res = await client.waifuai.createMessage({
+          messages: waifuData.messages,
+          ownerID: userId,
+          userMessage: message,
+        });
 
-          socket.emit(`sendWaifuMessage-${userId}`, res);
-        } catch (error) {
-          console.error(error);
-          return socket.emit(`sendWaifuMessage-${userId}`, null);
-        }
+        socket.emit(`sendWaifuMessage-${userId}`, res);
+      } catch (error) {
+        console.error("Socket Waifu Error:", error);
+        socket.emit(`sendWaifuMessage-${userId}`, null);
       }
-    );
+    });
   });
 };

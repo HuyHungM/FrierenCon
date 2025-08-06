@@ -17,7 +17,9 @@ module.exports = {
     },
   ],
   run: async (client, interaction) => {
-    const waifuData = await client.waifuai.find({ ownerID: interaction.id });
+    const waifuData = await client.waifuai.find({
+      ownerID: interaction.user.id,
+    });
     if (waifuData)
       return interaction.reply({
         content:
@@ -32,7 +34,7 @@ module.exports = {
         messages: AIConfig.getStarterMessage(
           interaction,
           interaction.options.get("name").value
-        ),
+        ).history,
       });
 
       interaction.reply({

@@ -2,7 +2,6 @@ const {
   ApplicationCommandType,
   ApplicationCommandOptionType,
 } = require("discord.js");
-const { model } = require("../../config/AIConfig");
 const { commandCategory } = require("../../utils/other");
 
 module.exports = {
@@ -41,18 +40,15 @@ module.exports = {
 
     try {
       await interaction.deferReply();
-      waifuData.messages.push({ role: "user", content: message.value });
       const res = await client.waifuai.createMessage({
         messages: waifuData.messages,
-        waifuName: waifuData.name,
-        model: model,
+        userMessage: message.value,
         ownerID: interaction.user.id,
-        ownerName: interaction.user.username,
       });
 
       if (!res) return;
 
-      interaction.editReply(res.choices[0].message.content);
+      interaction.editReply(res);
     } catch (error) {
       interaction.reply({ content: "Đã xảy ra lỗi", flags: 64 });
       console.error(error);
