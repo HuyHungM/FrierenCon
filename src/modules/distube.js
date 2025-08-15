@@ -6,6 +6,7 @@ const { DeezerPlugin } = require("@distube/deezer");
 const { Collection } = require("discord.js");
 const { StreamType } = require("distube");
 const ffmpegPath = require("ffmpeg-static");
+const cookies = require("../config/cookies");
 
 module.exports = (client) => {
   const distube = new DisTube(client, {
@@ -16,6 +17,17 @@ module.exports = (client) => {
     savePreviousSongs: true,
     emitAddSongWhenCreatingQueue: false,
     emitAddListWhenCreatingQueue: true,
+    youtubeCookie: cookies,
+    ffmpeg: {
+      path: ffmpegPath,
+    },
+    customFilters: client.config.music.filters,
+    streamType: StreamType.OPUS,
+    joinNewVoiceChannel: false,
+    ytdlOptions: {
+      quality: "highestaudio",
+    },
+    nsfw: true,
     plugins: [
       new SpotifyPlugin({
         api: {
@@ -29,18 +41,9 @@ module.exports = (client) => {
         clientId: process.env.SOUNDCLOUD_ID,
         oauthToken: process.env.SOUNDCLOUD_SECRET,
       }),
-      new YtDlpPlugin({ update: false }),
       new DeezerPlugin(),
+      new YtDlpPlugin({ update: true }),
     ],
-    ffmpeg: {
-      path: ffmpegPath,
-    },
-    customFilters: client.config.music.filters,
-    streamType: StreamType.OPUS,
-    joinNewVoiceChannel: false,
-    ytdlOptions: {
-      quality: "highestaudio",
-    },
   });
 
   client.distube = distube;

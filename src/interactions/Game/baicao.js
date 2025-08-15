@@ -63,7 +63,7 @@ module.exports = {
       });
     }
 
-    let bankData = await client.bank.findOn({ userID: interaction.user.id });
+    let bankData = await client.bank.find({ userID: interaction.user.id });
     if (!bankData)
       bankData = await client.bank.create({ userID: interaction.user.id });
 
@@ -95,7 +95,7 @@ module.exports = {
     }
 
     let newBank = await client.bank.update({
-      userID: message.author.id,
+      userID: interaction.user.id,
       money: moneyChange,
     });
 
