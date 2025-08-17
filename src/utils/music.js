@@ -19,7 +19,7 @@ const checkSameRoom = ({ message, interaction, client }) => {
       return;
     else {
       return message.reply({
-        content: "Bạn phải vào chung phòng với bot để sử dụng lệnh này!",
+        content: `Bạn phải vào chung phòng với ${client.user.username} để sử dụng lệnh này!`,
         flags: 64,
       });
     }
@@ -38,7 +38,7 @@ const checkSameRoom = ({ message, interaction, client }) => {
       return;
     else {
       return interaction.reply({
-        content: "Bạn phải vào chung phòng với bot để sử dụng lệnh này!",
+        content: `Bạn phải vào chung phòng với ${client.user.username} để sử dụng lệnh này!`,
         flags: 64,
       });
     }

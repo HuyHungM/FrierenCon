@@ -22,7 +22,10 @@ module.exports = (client) => {
 
     if (!command) command = client.commands.get(client.aliases.get(cmd));
     if (command) {
-      if (command.category === CommandCategory.MUSIC) {
+      if (
+        command.category === CommandCategory.MUSIC &&
+        command.name !== "join"
+      ) {
         if (
           checkSameRoom({ message: message, interaction: null, client: client })
         )
